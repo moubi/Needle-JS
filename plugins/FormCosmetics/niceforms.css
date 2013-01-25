@@ -1,0 +1,96 @@
+/**
+ * CSS stylesheet for FormCosmetics plugin. 
+ */
+
+/*Radio*/
+.fc_radio {
+	display: block;
+	width: 12px; 
+	height: 12px; 
+	margin: 2px 0 0 2px;
+	cursor: pointer;  
+	border: 1px solid transparent; 
+	background: url(../img/radio.png) no-repeat 0 0;
+	float: left; 
+	z-index: 2;
+}
+/*Checkbox*/
+.fc_checkbox {
+	display: block;
+	width: 15px; 
+	height: 15px;
+	margin: 1px 0 0 2px;
+	cursor: pointer; 
+	border: 1px solid transparent; 
+	background: url(../img/checkbox.png) no-repeat 0 0;
+	float: left; 
+	z-index: 2;
+}
+/*Selects*/
+.fc_select {
+	display: block;
+	position: relative;
+	width: 150px; 
+	height: 20px; 
+	border: 1px solid transparent; 
+	float: left;
+}
+.fc_select_left {
+	display: block; 
+	width: 2px; 
+	height: 20px; 
+	background: url(../img/selectbox_left.png) no-repeat 0 0;
+	float: left; 
+}
+.fc_select_right {
+	display: block; 
+	height: 20px; 
+	width: 148px; 
+	background: url(../img/selectbox.png) no-repeat 100% 0; 
+	cursor: pointer; 
+	font: 12px/20px Tahoma, Verdana, sans-serif; 
+	color: #6c592e;
+	float: left;
+}
+.fc_select_options {
+	position: absolute;
+	width: 100%; 
+	max-height: 200px;
+	left: 0; 
+	top: 19px;
+	margin: 0;
+	padding: 4px 0; 
+	background: #fff;  
+	list-style: none; 
+	color: #6c592e; 
+	font: 12px/14px Tahoma, Verdana, sans-serif; 
+	overflow: hidden; 
+	z-index: 4;
+}
+.fc_select_choice {
+	display: block;
+	padding: 0 0 0 3px;
+}
+.fc_select_options li { 
+	display: block; 
+	padding-bottom: 1px; 
+}
+.fc_select_options a { 
+	display: block; 
+	text-decoration: none; 
+	color: #6c592e; 
+	padding: 2px 5px; 
+	background: none;
+}
+.fc_select_options a:hover { background: #efecde; }
+
+/*Focused*/
+.fc_focused { border:1px dotted #666; }
+/*Hovered*/
+.fc_bg_bottom { background-position: bottom left; }
+.fc_bg_top { background-position: top left; }
+/*Hidden*/
+.fc_hidden { display: none !important; }
+.fc_visible { display: block !important; }
+/*Safari*/
+select, input, textarea, button {outline:none; resize:none;}

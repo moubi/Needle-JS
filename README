@@ -1,1 +1,55 @@
-Needle JS
+Needle JS - a Class like Object oriented javascript framework.
+
+Needle JS is an Object oriented javascript framework, realizing the notion of classes. 
+Its goal is to separate logic and complexity into different files (classes), which then can be requested dynamically and extended if needed.
+
+Needle JS exposes one global variable - NEEDLE.
+A core file is present containing all features needed to request, extend and use the rest of the classes. 
+
+Classes in Needle JS are constructor functions, having: 
+	1) private methods;
+	2) public methods;
+	3) public properties;
+	4) private properties;
+	5) constants;
+	6) static methods;
+	7) static properties;
+	8) constructors;
+
+Structure:
+	- Framework contains several files. 
+	- Each file has the same name as the name of the class inside. 
+	- Every class can be requested by NEEDLE.require() method. 
+	- Several classes may load synchronously or asynchronously.
+	- All classes can be extended. 
+	- All base classes inherit from NEEDLE.Object class. 
+	- Custom user classes can extend one or more base classes. 
+
+Needle JS currently works on these browsers:
+    - IE 7+
+    - Opera 9.5+
+    - Chrome
+    - Safari 3+
+    - Firefox 3 (not fully tested)
+
+How to use Needle JS:
+
+1) Include Needle.js file into you HTML (just before the closing BODY tag):
+<script id="needle" type="text/javascript" src="/path/to/Needle.js"></script>
+
+2) Request some base classes:
+NEEDLE.require("DOM.js");
+NEEDLE.require("Ajax.js");
+
+3) Request your own classes dependent on previously requested:
+NEEDLE.require("/path/to/MyClass.js");
+
+Note:
+ 
+A developers with different syntax preferences can still use Needle JS classes, extend them, etc. 
+I personally encourage you to follow the classical syntax as it is more clear and visually appealing. 
+Server-side languages like PHP and Java are closer to Needle JS as a class structure, that why you will be privileged 
+if these languages are into your backpack.
+
+Needle JS is capable to achieve what other libraries like JQuery, MooTools, YUI can.
+What makes it different is the way it does that and the way it exposes its features.   
