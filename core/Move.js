@@ -130,7 +130,7 @@ function Details(element, configuration) {
  * @method _configure
  * @access private
  * 
- * @description Prepares element for a movemenet by editing its style.
+ * @description Prepares element for a movement by editing its style.
  * 
  * @param element HTMLElement (required)
  * @param configuration Object (required)

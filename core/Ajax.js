@@ -156,7 +156,7 @@ function _openConnection(method, url, params) {
 function _callback(fn) {
     if (this.readyState == 4) {
     	if (this.status == 200) {
-            (typeof fn == "function") && fn();
+            (typeof fn === "function") && fn.call(this);
         }
     }
 }

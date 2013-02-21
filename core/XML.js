@@ -16,6 +16,7 @@ function XML() {
  */
 XML.prototype.XML = function() { 
 	this.doc = null;
+	this.xml = null;
 };
 /**
  * @method createDocument
@@ -53,10 +54,10 @@ XML.prototype.createDocument = function(root) {
  */
 XML.prototype.load = function(url, callback) {
 	var that = this, request = new XMLHttpRequest();
-	
     request.onreadystatechange = function() {
     	if (request.readyState == 4) {
     		that.doc = request.responseXML;
+    		that.xml = that.doc.documentElement || that.doc;
     		(typeof callback === "function") && callback.call(that);
     	}
     };
@@ -96,7 +97,7 @@ XML.prototype.parse = function(text) {
  * @returns String
  */
 XML.serialize = function(node) {
-    if (typeof XMLSerializer !== "undefined") {
+    if (typeof XMLSerializer !== "undefined" && typeof node.xml === "undefined") {
     	XML.serialize = function(node) { return new XMLSerializer().serializeToString(node); };
     } else {
     	XML.serialize = function(node) { return node.xml; };

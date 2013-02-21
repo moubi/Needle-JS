@@ -509,5 +509,7 @@ Needle.prototype.namespace = function(name) {
 };
 
 Needle.prototype.constructor = null;
+
 window.NEEDLE = new Needle();
+window.N = window.N || window.NEEDLE;
 })();

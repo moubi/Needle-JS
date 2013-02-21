@@ -3,7 +3,7 @@ NEEDLE.plug("CurtainSlideshow", function() {
  * Extends NEEDLE.BasicOpacity class
  * 
  * Think of a way to create an Interface (php like) for all slideshows
- * in the future. They all share same behaviour.
+ * in the future. They all share same behavior.
  */
 NEEDLE.extend(CurtainSlideshow, NEEDLE.BasicOpacity);
 /**
