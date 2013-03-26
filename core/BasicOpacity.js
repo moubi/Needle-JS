@@ -118,7 +118,7 @@ function Details(config) {
 	this.opacity = (!config.visible) ? config.minOpacity : config.maxOpacity;
 	this.inProgress = false;
 	
-	if (!document.all) {		
+	if (!document.all || typeof Array.prototype.indexOf !== "undefined") {		
 		this.target.style.opacity = this.opacity;
 	} else {
 		var elements = this.target.getElementsByTagName("*"), i = elements.length;
@@ -137,7 +137,7 @@ function Details(config) {
  * @returns void
  */
 function _equlize() {
-	if (document.all) {
+	if (document.all && typeof Array.prototype.indexOf === "undefined") {
 		this.step *= 100;
 		this.maxOpacity *= 100;
 		this.minOpacity *= 100;
@@ -154,7 +154,7 @@ function _equlize() {
  * @returns void
  */
 function _assignOpacity(style, opacity) {
-	_assignOpacity = function(style, opacity) { (!document.all) ? (style.opacity = opacity) : (style.filter = "alpha(opacity=" + opacity + ")"); };
+	_assignOpacity = function(style, opacity) { (!document.all || typeof Array.prototype.indexOf !== "undefined") ? (style.opacity = opacity) : (style.filter = "alpha(opacity=" + opacity + ")"); };
 	_assignOpacity(style, opacity);
 };
 

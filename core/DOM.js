@@ -60,7 +60,7 @@ DOM.createPlus = function(element, attributes, ns) {
  * @method setAttributes
  * @access public static
  * 
- * @description Sets HTML element's attributes by using or not namespace.
+ * @description Sets HTML/SVG/XML element's attributes by using or not namespace.
  * 
  * @param element HTMLElement (required)
  * @param attributes Object (required)
@@ -86,20 +86,22 @@ DOM.setAttributes = function(element, attributes, ns) {
  * @method getAttributes
  * @access public static
  * 
- * @description Returns attributes of an HTML element.
+ * @description Returns attributes of an HTML/SVG/XML element.
  * 
  * @param element HTMLElement (required)
  * @param params String|Object (required)
  * @returns Array (name=value)
  */
-DOM.getAttributes = function(element, params) {
+DOM.getAttributes = function(element, params, ns) {
 	if (typeof params === "string") {
-		return element.attributes[params];
+		return (typeof ns == "undefined") ? element.attributes[params] : element.getAttributeNS(ns, params);
 		
 	} else if (typeof params === "object") {
 		var i = params.length, collection = {};
-		while (i--) {
-			collection[params[i]] = element.attributes[params[i]];
+		if (typeof ns == "undefined") {
+			while (i--) { collection[params[i]] = element.attributes[params[i]]; }
+		} else {
+			while (i--) { collection[params[i]] = element.getAttributeNS(ns, params[i]); }
 		}
 		return collection;
 	}
@@ -197,7 +199,7 @@ DOM.insertBefore = function(element, before) {
  */
 DOM.copy = function(elements) {
 	var fragment = document.createDocumentFragment(), i;
-	if (typeof elements == "object") {
+	if (typeof elements === "object") {
 		for (i in elements) {
 			DOM.add(elements[i].cloneNode(true), fragment);
 		}
@@ -215,7 +217,7 @@ DOM.copy = function(elements) {
  * @returns DOM class
  */
 DOM.cut = function(elements, destination) {
-	if (typeof elements == "object") {
+	if (typeof elements === "object") {
 		var fragment = document.createDocumentFragment(), i;
 		for (i in elements) {
 			DOM.add(elements[i], fragment);
@@ -339,9 +341,11 @@ DOM.getElementsByAttribute = function(attribute, value, context, tag) {
  * @returns void
  */
 function _getElementByAttribute(element, attribute, value, returnElements) {
-	if (element[attribute] != "") {
+	// getAttribute instead of element[attribute], because of datasets
+	attribute = element.getAttribute(attribute);
+	if (attribute != "") {
 		if (value != null) {
-			new RegExp("^([\\d\\D\\S]+\\s)*" + value + "(\\s+|\\s+[\\d\\D\\S]+)*$").test(element[attribute]) && returnElements.push(element);
+			new RegExp("^([\\d\\D\\S]+\\s)*" + value + "(\\s+|\\s+[\\d\\D\\S]+)*$").test(attribute) && returnElements.push(element);
 		} else {
 			returnElements.push(element);
 		}

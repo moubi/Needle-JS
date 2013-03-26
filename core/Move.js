@@ -77,7 +77,7 @@ Move.prototype.start = function(element, callback) {
  */
 Move.prototype.stop = function(element, callback) {
 	clearInterval(NEEDLE.get(element).cycling);
-	(typeof callback === "function") && callback();
+	(typeof callback === "function") && callback.call(this);
 };
 /**
  * @method cycling
@@ -96,7 +96,7 @@ Move.prototype.cycling = function(element, callback) {
 
 	if (element.lengthX <= 0 && element.lengthY <= 0) {
 		clearInterval(element.element.cycling);
-		(typeof callback === "function") && callback();
+		(typeof callback === "function") && callback.call(this);
 	}
 };
 

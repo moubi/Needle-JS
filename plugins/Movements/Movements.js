@@ -1,6 +1,6 @@
 NEEDLE.plug("Movements", function() {
 // Extends NEEDLE.Move class
-NEEDLE.transplant("Movements", NEEDLE.Move);
+NEEDLE.extend(Movements, NEEDLE.Move);
 /**
  * @class Movements 
  * 
@@ -18,7 +18,7 @@ function Movements(configuration) {
  */
 Movements.prototype.Movements = function(configuration) {
 	this.Move(NEEDLE.objectMerge({ interval : 15 }, configuration));
-	this.gradual = [];
+	this.gradual = configuration.progression || null;
 };
 /**
  * @method start
@@ -32,15 +32,7 @@ Movements.prototype.Movements = function(configuration) {
  * @returns void
  */
 Movements.prototype.start = function(element, callback) {
-	this.gradual[element.configuration.id] = new NEEDLE.Gradual("progression", {
-		length: Math.ceil(element.configuration.length/element.configuration.id), 
-		start: 15, 
-		step: 1, 
-		section: 16, 
-		factor: 5, 
-		reverse: true
-	});
-	_effects.call(this, element, callback);
+	(this.gradual !== null) && _effects.call(this, element, callback);
 };
 /**
  * @method _effects
@@ -63,7 +55,7 @@ function _effects(element, callback) {
 			return false;
 		}
 		_effects.call(that, element, callback);
-	}, this.gradual[element.configuration.id].next());
+	}, this.gradual.next());
 }
 
 return Movements;
