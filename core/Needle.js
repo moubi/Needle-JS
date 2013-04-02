@@ -1,5 +1,4 @@
 (function() {
-
 /**
  * @class Object
  * @description All other classes inherit from it
@@ -80,7 +79,6 @@ Object.prototype.getPublicMembers = function() {
 	}
 	return obj;
 };
-/* /OBJECT Class */
 
 /**
  * LIBRARIAN 
@@ -511,5 +509,5 @@ Needle.prototype.namespace = function(name) {
 Needle.prototype.constructor = null;
 
 (!(window.NEEDLE instanceof Needle)) && (window.NEEDLE = new Needle());
-window.N = window.N || window.NEEDLE;
+window.N = window.NEEDLE;
 })();
