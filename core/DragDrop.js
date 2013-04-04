@@ -20,10 +20,10 @@ DragDrop.prototype.DragDrop = function(box, handle) {
 	this.box = NEEDLE.get(box); 
     this.handle = NEEDLE.get(handle);
     
-    this.x = this.y = 0;
     this.mouseDownFlag = false;
     this.objectWindow = {}; 
 	this.delta = { x : 0, y : 0 };
+	this.mousePos = { x : 0, y : 0 };
 };
 /**
  * @method mouseMove
@@ -51,19 +51,19 @@ DragDrop.prototype.mouseMove = function(e) {
  * @access public
  * 
  * @description Called onmousedown, prepares element (box) to be moved.
+ * @param e EventObject (required)
  * 
  * @returns current instance
  */
-DragDrop.prototype.mouseDown = function() {		
+DragDrop.prototype.mouseDown = function(e) {		
 	var style = this.box.style;
 	this.mouseDownFlag = true;
 	
 	style.position = "absolute"; 
 	style.zIndex = 10000;
-	this.objectWindow = {
-        x : parseInt(style.left),
-        y : parseInt(style.top)
-    };
+	this.objectWindow = { x : parseInt(style.left), y : parseInt(style.top) };
+	this.mousePos = this.mouse(e);
+	
 	return this;
 };
 /**
@@ -82,42 +82,46 @@ DragDrop.prototype.mouseUp = function() {
  * @method open
  * @access public
  * 
- * @description Prepares HTML element (box) to be moved from a certain position - elementToOpenOn.
+ * @description Prepares HTML element (box) to be moved from a certain position.
+ * This method can be called if element is not set to an absolute position - otherwise can be skipped.
  * 
- * @param elementToOpenOn HTMLElement (optional)
  * @returns current instance
  */
-DragDrop.prototype.open = function(elementToOpenOn) {
-	if (!elementToOpenOn) {
-		this.box.style.top = NEEDLE.getY(this.box) + "px";
-		this.box.style.left = NEEDLE.getX(this.box) + "px";
-	} else {
-		this.box.style.top = (NEEDLE.getY(elementToOpenOn) - this.box.offsetHeight / 2) + "px";
-		this.box.style.left = (NEEDLE.getX(elementToOpenOn) - this.box.offsetWidth / 2) + "px";
-	}
+DragDrop.prototype.open = function() {
+	this.box.style.top = NEEDLE.getY(this.box) + "px";
+	this.box.style.left = NEEDLE.getX(this.box) + "px";
 	return this;
+};
+/**
+ * @method mouse
+ * @access public
+ * 
+ * @description Gets cursor position based on browser 
+ * @param e EventObject (required)
+ * 
+ * @returns current instance
+ */
+DragDrop.prototype.mouse = function(e) {
+	if(NEEDLE.isIE) {
+		DragDrop.prototype.mouse = function(e) { return { x : event.clientX + document.body.scrollLeft, y : event.clientY + document.body.scrollTop }; };
+    } else {
+    	DragDrop.prototype.mouse = function(e) { return { x : e.pageX, y : e.pageY }; };
+    }
+	return this.mouse(e);
 };
 /**
  * @method _getMouseXY
  * @access private
  * 
- * @description Gets mouse cursor's coordinates.
+ * @description Gets mouse cursor's coordinates and sets internal variables.
  * 
  * @param e EventObject (required)
  * @returns void
  */
 function _getMouseXY(e) {
-    if(NEEDLE.isIE) {
-        var mouseX = event.clientX + document.body.scrollLeft, 
-        	mouseY = event.clientY + document.body.scrollTop;
-    } else {
-        var mouseX = e.pageX, mouseY = e.pageY;
-    }
-    this.delta.x = mouseX - this.x;
-    this.delta.y = mouseY - this.y;
-
-    this.x = mouseX;
-    this.y = mouseY;    
+	var mouse = this.mouse(e);
+    this.delta = { x : mouse.x - this.mousePos.x, y : mouse.y - this.mousePos.y };
+    this.mousePos = { x : mouse.x, y : mouse.y };    
 };
 
 return DragDrop;
