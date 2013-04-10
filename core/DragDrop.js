@@ -36,8 +36,8 @@ DragDrop.prototype.DragDrop = function(box, handle) {
  * @returns current instance
  */
 DragDrop.prototype.mouseMove = function(e) {
-    _getMouseXY.call(this, e);
     if (this.mouseDownFlag) {
+    	_getMouseXY.call(this, e);
     	this.box.style.top = this.objectWindow.y + this.delta.y + "px";
     	this.box.style.left = this.objectWindow.x + this.delta.x + "px";
 
@@ -55,13 +55,12 @@ DragDrop.prototype.mouseMove = function(e) {
  * 
  * @returns current instance
  */
-DragDrop.prototype.mouseDown = function(e) {		
-	var style = this.box.style;
+DragDrop.prototype.mouseDown = function(e) {
 	this.mouseDownFlag = true;
 	
-	style.position = "absolute"; 
-	style.zIndex = 10000;
-	this.objectWindow = { x : parseInt(style.left), y : parseInt(style.top) };
+	this.box.style.position = "absolute"; 
+	this.box.style.zIndex = 10000;
+	this.objectWindow = { x : parseInt(this.box.style.left), y : parseInt(this.box.style.top) };
 	this.mousePos = this.mouse(e);
 	
 	return this;
@@ -74,7 +73,7 @@ DragDrop.prototype.mouseDown = function(e) {
  * 
  * @returns current instance
  */
-DragDrop.prototype.mouseUp = function() {		
+DragDrop.prototype.mouseUp = function() {
 	this.mouseDownFlag = false;
 	return this;
 };
