@@ -90,13 +90,9 @@ Events.stopPropagation = function(e) {
  */
 Events.preventDefault = function(e) {
     if (!document.all) {
-    	Events.preventDefault = function(e) {
-    		e.preventDefault();
-    	};	
+    	Events.preventDefault = function(e) { e.preventDefault(); };	
     } else {
-    	Events.preventDefault = function(e) {
-    		window.event.returnValue = false;     
-    	};
+    	Events.preventDefault = function(e) { window.event.returnValue = false; };
     }
     Events.preventDefault(e);
 };

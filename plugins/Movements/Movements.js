@@ -35,6 +35,22 @@ Movements.prototype.start = function(element, callback) {
 	(this.gradual !== null) && _effects.call(this, element, callback);
 };
 /**
+ * @method stop
+ * @access public 
+ * 
+ * @description Stops movement. 
+ * 
+ * @param element HTMLElement (required)
+ * @param callback Function (optional)
+ * 
+ * @returns void
+ */
+Movements.prototype.stop = function(element, callback) {
+	clearTimeout(NEEDLE.get(element).cycling);
+	element.cycling = null;
+	(typeof callback === "function") && callback.call(this);
+};
+/**
  * @method _effects
  * @access private 
  * 
@@ -47,15 +63,13 @@ Movements.prototype.start = function(element, callback) {
  */
 function _effects(element, callback) {
 	var that = this;
-
-	element.element.cycling = setTimeout(function() {
-		that.cycling(element, callback);
-		
-		if (element.lengthX <= 0 && element.lengthY <= 0) {
-			return false;
-		}
-		_effects.call(that, element, callback);
-	}, this.gradual.next());
+	if (element.element.cycling !== null) {
+		element.element.cycling = setTimeout(function() {
+			that.cycling(element, callback);
+			if (element.lengthX <= 0 && element.lengthY <= 0) { return false; }
+			_effects.call(that, element, callback);
+		}, this.gradual.next());
+	}
 }
 
 return Movements;

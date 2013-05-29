@@ -69,6 +69,8 @@ Move.prototype.start = function(element, callback) {
  * @access public
  * 
  * @description Stops movement and executes callback function.
+ * TODO element.cycling is not a good idea as it is problematic to put several
+ * movements on a single element (all of them will have same "cycling" property)
  * 
  * @param element Details class Instance (required)
  * @param callback Function (optional)
@@ -115,7 +117,7 @@ function Details(element, configuration) {
 	this.configuration = configuration = _configure(element, configuration);
 	var lengthX = configuration.destination.left - parseFloat(element.style.left),  
 		lengthY = configuration.destination.top - parseFloat(element.style.top);
-
+	
 	this.element = element;
 	this.lengthX = Math.abs(lengthX);
 	this.lengthY = Math.abs(lengthY);
