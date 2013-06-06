@@ -1,20 +1,12 @@
 NEEDLE.transplant("DOM", function() {
-// Extends its prototype with NEEDLE.Object's prototype
-NEEDLE.extend(DOM, NEEDLE.Object);
 /**
  * @class DOM 
  * 
  */
-function DOM() {
-	this.DOM();
-}
-/**
- * @constructor DOM
- * @access public
- * 
- * @returns void
- */
-DOM.prototype.DOM = function() {};
+var DOM = NEEDLE.Sizzle || function() {};
+// Extends its prototype with NEEDLE.Object's prototype
+NEEDLE.extend(DOM, NEEDLE.Object);
+
 /**
  * @method create
  * @access public static
@@ -60,13 +52,11 @@ DOM.setAttributes = function(element, attributes, ns) {
 	if (typeof ns == "undefined") {
 		for (i in attributes) {
 			value = attributes[i];
-			(i == "class") && (i = "className");
-			element[i] = value;
+			(i == "className") && (i = "class");
+			element.setAttribute(i, value);
 		}
 	} else {
-		for (i in attributes) {
-			element.setAttributeNS(ns, i, attributes[i]);
-		}
+		for (i in attributes) { element.setAttributeNS(ns, i, attributes[i]); }
 	}
 	return DOM;
 };
@@ -214,131 +204,6 @@ DOM.cut = function(elements, destination) {
 	}
 	return DOM;
 };
-/**
- * @method getFirstLevelNodes
- * @access public static
- * 
- * @description Returns all first level elements|nodes information 
- * within an HTMLElement|XMLNode except textNodes and HTML Comments.
- * 
- * @param node HTMLElement|XMLNode (required)
- * @returns Array
- */
-DOM.getFirstLevelNodes = function(node) {
-	var collection = [],
-		nodes = node.childNodes, 
-		i = nodes.length, 
-		escapeTypes = {3 : 0, 8 : 0};
-	
-	while (i--) {
-		(!(nodes[i].nodeType in escapeTypes)) && collection.push(nodes[i]);
-    }
-	return collection.reverse();
-};
-/**
- * @method getElementsByClassName
- * @access public static
- * 
- * @description Returns all elements with a tag having a className|s 
- * within certain HTML element.
- * @note On RegEx className should not contain space at the end as the regex is looking for such.
- * 
- * TODO Make RegEx more efficient if possible. 
- * TODO RegEx requires further testing.
- * 
- * @param className String (required)
- * @param context HTMLElement|document (required)
- * @param tag String (optional)
- * @returns Array
- */
-DOM.getElementsByClassName = function(className, context, tag) {	
-	if (document.getElementsByClassName) {
-		DOM.getElementsByClassName = function(className, context, tag) {
-			tag = tag || "*";
-			context = context || document;
-			
-			var elements = context.getElementsByClassName(className);
-			if (tag != "*") {
-				var buffer = [], i = elements.length;
-				while (i--) {
-					(elements[i].nodeName == tag.toUpperCase()) && buffer.push(elements[i]);
-				}
-				elements = buffer.reverse();
-			}
-			return Array.prototype.slice.call(elements, 0);
-		};
-	} else {
-		DOM.getElementsByClassName = function(className, context, tag) {
-			tag = tag || "*";
-			context = context || document;
-			
-			var elements = context.getElementsByTagName(tag), 
-				i = elements.length, returnElements = [];
-			
-			while (i--) {
-				(new RegExp("^([\\d\\D\\S]+\\s)*" + className + "(\\s+|\\s+[\\d\\D\\S]+)*$").test(elements[i].className)) && returnElements.push(elements[i]);
-			}
-			return returnElements.reverse();
-		};
-	}
-	return DOM.getElementsByClassName(className, context, tag);
-};
-/**
- * @method getElementsByAttribute
- * @access public static
- * 
- * @description Returns all elements with a tag having an attribute 
- * and/or attribute value within certain HTML element.
- * 
- * @param attribute String (required)
- * @param value String|null (required)
- * @param context HTMLElement|document (required)
- * @param tag String (optional)
- * @returns Array
- */
-DOM.getElementsByAttribute = function(attribute, value, context, tag) {
-	tag = tag || "*";
-	context = context || document;
-	value = (typeof value == "string") ? value : null;
-	
-	var elements = context.getElementsByTagName(tag), 
-		i = elements.length, returnElements = [];
-
-	while (i--) {
-		_getElementByAttribute(elements[i], attribute, value, returnElements);
-	}
-	return returnElements.reverse();
-};
-
-/**
- * @method _getElementByAttribute
- * @access private
- * 
- * @description Fills Array with HTML elements matching parameters passed.
- * @note On RegEx attribute value should not contain space at the end as the regex is looking for such.
- * @note There is a IE7 promblem - it has all possible attributes for an element in its attributes collection.
- * So there is no way to distinguish if an attribute has been set with empty value or has not been set at all.
- * 
- * TODO Make RegEx more efficient if possible.
- * TODO RegEx requires further testing.
- * 
- * @param element HTMLElement (required)
- * @param attribute String (required)
- * @param value String|null (required)
- * @param returnElements Array (required)
- * @returns void
- */
-function _getElementByAttribute(element, attribute, value, returnElements) {
-	// getAttribute instead of element[attribute], because of datasets
-	attribute = element.getAttribute(attribute);
-	if (attribute != "") {
-		if (value != null) {
-			new RegExp("^([\\d\\D\\S]+\\s)*" + value + "(\\s+|\\s+[\\d\\D\\S]+)*$").test(attribute) && returnElements.push(element);
-		} else {
-			returnElements.push(element);
-		}
-	}
-}
 
 return DOM;
 });
