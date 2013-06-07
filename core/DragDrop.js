@@ -14,7 +14,7 @@ function DragDrop(box, handle) {
  * 
  * @param box HTMLElement|String (required)
  * @param handle HTMLElement|String (required)
- * @returns void
+ * @returns current instance
  */
 DragDrop.prototype.DragDrop = function(box, handle) {
 	this.box = NEEDLE.get(box); 
@@ -24,6 +24,7 @@ DragDrop.prototype.DragDrop = function(box, handle) {
     this.objectWindow = {}; 
 	this.delta = { x : 0, y : 0 };
 	this.mousePos = { x : 0, y : 0 };
+	return this;
 };
 /**
  * @method mouseMove
