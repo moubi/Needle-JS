@@ -72,12 +72,12 @@ DOM.setAttributes = function(element, attributes, ns) {
  */
 DOM.getAttributes = function(element, params, ns) {
 	if (typeof params === "string") {
-		return (typeof ns == "undefined") ? element.attributes[params] : element.getAttributeNS(ns, params);
+		return (typeof ns == "undefined") ? element.getAttribute(params) : element.getAttributeNS(ns, params);
 		
 	} else if (typeof params === "object") {
 		var i = params.length, collection = {};
 		if (typeof ns == "undefined") {
-			while (i--) { collection[params[i]] = element.attributes[params[i]]; }
+			while (i--) { collection[params[i]] = element.getAttribute(params[i]); }
 		} else {
 			while (i--) { collection[params[i]] = element.getAttributeNS(ns, params[i]); }
 		}
