@@ -377,42 +377,6 @@ Needle.prototype.inArray = function(value, array) {
 	return false;
 };
 /**
- * @method getX 
- * @access public
- * 
- * @description Gets left position of an element.
- * 
- * @param el HTMLElement (required)
- * 
- * @returns Integer
- */
-Needle.prototype.getX = function(el) {
-	var left = 0;
-	while(el != null) {
-		left += el.offsetLeft;
-		el = el.offsetParent;
-	}
-	return left;
-};
-/**
- * @method getY 
- * @access public
- * 
- * @description Gets top position of an element.
- * 
- * @param el HTMLElement (required)
- * 
- * @returns Integer
- */
-Needle.prototype.getY = function(el) {
-	var top = 0;
-	while(el != null) {
-		top += el.offsetTop;
-		el = el.offsetParent;
-	}
-	return top;
-};
-/**
  * @method extendPrototype 
  * @access public
  * 
