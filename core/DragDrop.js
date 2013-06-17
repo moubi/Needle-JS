@@ -88,8 +88,8 @@ DragDrop.prototype.mouseUp = function() {
  * @returns current instance
  */
 DragDrop.prototype.open = function() {
-	this.box.style.top = NEEDLE.getY(this.box) + "px";
-	this.box.style.left = NEEDLE.getX(this.box) + "px";
+	this.box.style.top = NEEDLE.DOM.getY(this.box) + "px";
+	this.box.style.left = NEEDLE.DOM.getX(this.box) + "px";
 	return this;
 };
 /**
