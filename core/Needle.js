@@ -314,7 +314,7 @@ Needle.prototype.get = function(element) {
  * @param obj2 Object (required)
  * @param obj2 Object (optional)
  * ...
- * @param objn Object (required)
+ * @param deep Boolean (optional) - Deep copy
  * 
  * @returns Object
  */
@@ -327,7 +327,7 @@ Needle.prototype.objectMerge = function() {
 			for (i in arguments[j]) {
 				switch (typeof arguments[j][i]) {
 					case "object": 
-						if (arguments[j][i] != null) {
+						if (arguments[j][i] != null && arguments[length-1]) {
 							if (!arguments[j][i].nodeName) {
 								obj[i] = this.objectMerge(((typeof obj[i] === "undefined") ? (this.isArray(arguments[j][i]) ? [] : {}) : obj[i]), arguments[j][i]);
 								break;
