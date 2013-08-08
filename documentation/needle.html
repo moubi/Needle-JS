@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NeedleJS documentation</title>
+	<meta charset=UTF-8">
+	<meta name="keywords" content="javascript api, documentation, framework, javascript library, toolset" />
+	<meta name="description" content="Needle JS - an Object oriented javascript framework with class like syntax" />
+	<meta name="author" content="Мирослав Николов (@moubi)" />
+
+	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>	
+	<link rel="stylesheet" href="css/reused.css" />
+	<link rel="stylesheet" href="css/grid.css" />
+	<link rel="stylesheet" href="css/fonts.css" />
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+	<section id="container" class="td _32 center">
+		<header>
+			<h1 class="td _6 left"><a href="index.html" title="NewEvent theme logo"><img src="files/logo.jpg" alt="NewEvent logo" /></a></h1>
+			<p class="td _25 header_text left">
+				Purpose of this section is to help you learn how to use NeedleJS as a <strong>framework</strong>, work with <strong>core classes</strong>, use and create your own <strong>plugins</strong>.
+				Want to <strong>use other libraries</strong> - NeedleJS combines with <strong>no conflicts</strong>.
+			</p>
+			<div class="clear"></div>
+		</header>
+		<nav class="td _7 left">
+			<section class="td menu rounded _6">
+				<ul>
+					<li><span class="flat"><a rel="overview" href="index.html" title="Overview">Overview</a></span></li>
+				</ul>
+			</section><br />	
+			<section id="menu" class="td menu rounded _6">
+				<ul>
+					<li><span><a rel="pages" href="#" title="Library API">API</a></span>
+						<ul>
+							<li><span><a rel="fair" class="item" href="#" title="Core classes">Core features</a></span>
+								<ul class="submenu">
+									<li><a href="needle.html" title="Needle.js features">Needle</a></li>
+									<li><a href="ajax.html" title="Using AJAX requests">AJAX</a></li>
+									<li><a href="dom.html" title="DOM and selector engine">DOM</a></li>
+									<li><a href="effects.html" title="Eye catching effects">Effects</a></li>
+									<li><a href="events.html" title="Working with event model">Events</a></li>
+									<li><a href="xml.html" title="Working with xml">XML</a></li>
+								</ul>
+							</li>
+							<li><span><a rel="results" class="item" href="#" title="Create and use plugins">Plugins</a></span>
+								<ul class="submenu">
+									<li><a href="create_plugins.html" title="Create plugins">Create</a></li>
+									<li><a href="extend.html" title="Extend plugins">Extend</a></li>
+									<li><a href="use_plugins.html" title="Use plugins">Use</a></li>
+								</ul>
+							</li>
+							<li><span><a rel="results" class="item" href="#" title="Core and plugins files">All files</a></span>
+								<ul class="submenu">
+									<li><a href="home_page_slideshow.html#home" title="Slideshow configuration">Slideshow</a></li>
+									<li><a href="home_page_widgets.html#home" title="Widget configuration">Widgets</a></li>
+									<li><a href="home_page_related.html#home" title="Related elements and features">Other elements</a></li>
+								</ul>
+							</li>
+							<li><span><a rel="about" href="#" title="Browsers support">Browsers</a></span></li>
+							<li><span><a rel="contact" href="#" title="Contacts and support">Contacts</a></span></li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</nav>
+		<div id="content" class="td _25 left">
+			<section class="content rounded">
+				<h2>Needle.js core features</h2>
+				<p>
+					The core of NeedleJS is placed in <strong>Needle.js</strong> file. 
+					It provides methods to <strong>organize</strong> your classes, <strong>extend</strong> them and <strong>add</strong> them to the page.
+					At your fingertips you can also find some handy methods and properties.
+				</p>
+				<label>Content:</label>
+				<ul id="page_content">
+					<li><a href="#build" title="Building classes">Class syntax</a></li>
+					<li><a href="#core" title="HTML code">Core classes</a></li>
+					<li><a href="#use" title="Add classes to the page">Use classes</a></li>
+					<li><a href="#handy" title="Handy methods and properties">Handy features</a></li>
+				</ul>
+			</section>
+			<section id="build" class="content rounded">
+				<h3>Class syntax</h3>
+				<p>Classes in NeedleJS are constructor functions with some additional functionality added.</p>
+				<label>Standard constructor: </label>
+<div class="pre rounded">
+<pre class="td _32">
+<code class="operator">function</code> Person(name) {
+    <code class="operator">this</code>.name = name || <code class="string">"Default name"</code>;
+}
+Person.prototype.setName = <code class="operator">function</code>(name) {
+    <code class="operator">if</code> (<code class="operator">typeof</code> name === <code class="string">"string"</code>) {
+        <code class="operator">this</code>.name = name;
+    }
+};
+Person.prototype.sayMyName = <code class="operator">function</code>() {
+    console.log(<code class="string">"My name is "</code> + <code class="operator">this</code>.name);
+};
+...
+</pre>
+</div>
+				<p>And now let's see how it would look through NeedleJS:</p>
+<div class="pre rounded">
+<pre class="td _32">
+NEEDLE.plug(<code class="string">"Person"</code>, <code class="operator">function</code>() {
+<code class="operator">function</code> Person(name) {
+    <code class="operator">this</code>.Person(name);
+}
+<code class="comment">// this is the constructor of the class (also used for inheritance)</code>
+Person.prototype.Person = <code class="operator">function</code>(name) {
+    <code class="operator">this</code>.name = name || <code class="string">"Default name"</code>;
+}
+<code class="comment">// This is public method</code>
+Person.prototype.setName = <code class="operator">function</code>(name) {
+    <code class="operator">if</code> (<code class="operator">typeof</code> name === <code class="string">"string"</code>) {
+        <code class="operator">this</code>.name = name;
+    }
+};
+<code class="comment">// This is public method</code>
+Person.prototype.sayMyName = <code class="operator">function</code>() {
+    console.log(<code class="string">"My name is "</code> + <code class="operator">this</code>.name);
+};
+Person.prototype.age = 20;<code class="comment">// This is public property</code>
+Person.race = <code class="string">"Caucasian"</code>;<code class="comment">// This is public static property</code>
+
+<code class="comment">// This is private method (shared among all class instances)</code>
+<code class="operator">function</code> _sayMyCardID() {
+    console.log(<code class="string">"My cardID is ..."</code>)
+}
+<code class="operator">var</code> _salary = 3000; <code class="comment">// This is private property/constant</code>
+
+<code class="operator">return</code> Person;
+});
+</pre>
+</div>
+				<p>
+					And that's it. We enclose our constructor Person in a <strong>"function"</strong> through our framework's plugin feature.
+					This allows us to have private properties and methods which are <strong>trully private</strong>.
+					It also allows us to <strong>require</strong> this class on the page once we need it.
+				</p>
+				<p class="align_right"><a href="#" title="top">top</a></p>
+			</section>
+			<section id="core" class="content rounded">
+				<h3>Core classes</h3>
+				<p>Inside NeedleJS there are several useful classes providing functionality you can find in most of the libraries out there.</p>
+				<label>Those are: </label>
+				<ul>
+					<li><strong>Ajax</strong> - handles AJAX requests to the server.</li>
+					<li><strong>DOM</strong> - helps you manipulate document elements. Uses Sizzle for selector engine.</li>
+					<li><strong>Events</strong> - event handler methods and useful event object manipulators.</li>
+					<li><strong>XML</strong> - providing methods for operating with xml files and values.</li>
+					<li><strong>XPath</strong> - helps you select xml nodes via XPath.</li>
+					<li><strong>Sizzle</strong> - JQuery's selector engine.</li>
+					<li><strong>Move</strong> - handles different movements.</li>
+					<li><strong>DragDrop</strong> - dragging and dropping html elements.</li>
+					<li><strong>BasicOpacity</strong> - provides show/hide transparency features.</li>
+					<li><strong>Colors</strong> - working with color transitions and transformations.</li>
+					<li><strong>Expandable</strong> - expand/collapse html elements.</li>
+					<li><strong>Gradual</strong> - providing variety of prograssion (useful for movements, expand/collapse, show/hide).</li>
+					<li><strong>Object</strong> - all core clases extend this one.</li>
+				</ul>
+				<p>All core classes extend <strong>Object</strong> class, which provides useful methods for working with class properties, methods and name.</p>
+				<p class="align_right"><a href="#" title="top">top</a></p>
+			</section>
+			<section id="use" class="content rounded">
+				<h3>How to use NeedleJS classes</h3>
+				<p>In this section we will see how to request and work with core classes and plugins.</p>
+				<p>
+					When creating classes with NeedleJS you are actually adding them to the framework. 
+					This allows you to use some handy methods on them after that.
+					One such method is <strong>require</strong> - it loads js file to the document.
+				</p>
+				<label>Here is how to use it:</label>
+<div class="pre rounded">
+<pre class="td _32">
+N.require(<code class="string">"Sizzle.js"</code>); 				<code class="comment">// requires Sizzle selector engine</code>
+N.require(<code class="string">"DOM.js"</code>); 					<code class="comment">// requires DOM core class</code>
+N.require(<code class="string">"Events.js"</code>); 				<code class="comment">// requires Events core class</code>
+N.require(<code class="string">"js/needlejs/plugins/Anchor/Anchor.js"</code>); 	<code class="comment">// requires Anchor plugin</code>
+
+<code class="comment">// onready method executes callback function after all required classes are loaded</code>
+N.onready(<code class="operator">function</code>() {
+
+});
+</pre>
+</div>
+				<p>Nothing special about <strong>require</strong> method. More about it you can read in the next section.</p>
+				<label>How to use classes:</label>
+<div class="pre rounded">
+<pre class="td _32">
+<code class="comment">// onready method executes callback function after all required classes are loaded</code>
+N.onready(<code class="operator">function</code>() {
+    <code class="comment">// Using Ajax core class</code>
+    <code class="operator">var</code> ajaxInstance = <code class="operator">new</code> N.Ajax();
+    ajaxInstance.request(<code class="string">"http://127.0.0.1/path_to_file"</code>, <code class="string">"post"</code>, <code class="operator">function</code>() {
+        <code class="comment">// callback executes after request is done</code>
+        <code class="comment">// "this" points to current instance for convenience</code>
+    }, <code class="string">"param1=value1&amp;param2=value2..."</code>);
+    
+    <code class="comment">// Using Anchor plugin</code>
+    N.plugins.Anchor.scrollTo(0, 0);
+});
+</pre>
+</div>
+				<p>
+					As you can see all core classes are directly attached to <strong>Needle</strong> and accessed via <strong>N</strong> object.<br />
+					Plugins on the other side are attached to <strong>Needle's plugins</strong> object and accessed via <strong>N.plugins</strong>.
+				</p>
+				<p>Knowing that it is easy to operate with classes after that as they act as ordinary constructor functions.</p>
+				<p class="align_right"><a href="#" title="top">top</a></p>
+			</section>
+			<section id="handy" class="content rounded">
+				<h3>NeedleJS core features</h3>
+				<p>Needle.js provides some handy built in features you can use.</p>
+				<label>Some of them: </label>
+<div class="pre rounded">
+<pre class="td _32">
+N.require(file, callback);		<code class="comment">// dynamically adds files to the page and executes function onload</code>
+N.objectMerge(Object1, Object2, ...); 	<code class="comment">// merges given number of objects</code> 
+N.isArray(Array); 			<code class="comment">// checks if passed parameter is Array</code>
+N.extend(child, parent); 		<code class="comment">// extends child prototype with parent one</code>
+...
+</pre>
+</div>
+
+				<label>Merging objects:</label>
+<div class="pre rounded">
+<pre class="td _32">
+<code class="operator">var</code> obj1 = { a : 1, b : 2 }; 
+<code class="operator">var</code> obj2 = { c : 3 };
+<code class="comment">// Adding obj2 values to obj1</code>
+N.objectMerge(obj1, obj2); 			<code class="comment">// obj1 is now { a : 1, b : 2, c : 3 }</code>
+<code class="comment">// Adding obj1 and obj2 values to new empty object</code>
+<code class="operator">var</code> obj3 = N.objectMerge({}, obj1, obj2); 	<code class="comment">// obj3 is now { a : 1, b : 2, c : 3 }</code> 
+</pre>
+</div>
+				<label>Extending classes:</label>
+<div class="pre rounded">
+<pre class="td _32">
+N.plugins(<code class="string">"AdvancedAjax"</code>, <code class="operator">function</code>() {
+N.extend(AdvancedAjax, N.Ajax);
+<code class="operator">function</code> AdvancedAjax() {
+    <code class="operator">this</code>.AdvancedAjax();
+}
+AdvancedAjax.prototype.AdvancedAjax = <code class="operator">function</code>() {
+    <code class="operator">this</code>.Ajax(); <code class="comment">// calling parent's constructor</code>
+};
+<code class="comment">// More methods and properties</code>
+...
+
+<code class="operator">return</code> AdvancedAjax;
+}); 
+</pre>
+</div>
+				<p><strong>AdvancedAjax</strong>'s prototype now contains <strong>Ajax</strong>'s prototype properties and methods (public)</p>
+				<label>Require classes:</label>
+<div class="pre rounded">
+<pre class="td _32">
+<code class="comment">// requires DOM core class and executes callback onload</code>
+N.require(<code class="string">"DOM.js"</code>, <code class="operator">function</code>() {
+    alert(<code class="string">"DOM.js has loaded"</code>);
+});
+
+or
+
+N.require(<code class="string">"DOM.js"</code>);
+N.onready(<code class="operator">function</code>() {
+    alert(<code class="string">"DOM.js has loaded"</code>);
+});
+</pre>
+</div>
+				<p class="align_right"><a href="#" title="top">top</a></p>
+			</section>
+		</div>	
+		<div class="clear"></div>
+	</section>
+	<div class="top_line"><div></div></div>
+	<script id="needle" src="js/needlejs/core/Needle.js"></script>
+	<script>
+		N.require("Sizzle.js");
+		N.require("DOM.js");
+		N.require("Events.js");
+		N.require("Expandable.js");
+		N.require("js/needlejs/plugins/Anchor/Anchor.js");
+
+		N.onready(function() {
+			var menuHolder = N.get("menu"), 
+				menuItems = N.DOM("a.item", menuHolder), i = menuItems.length, 
+				menu = new N.Expandable({ expandStep : 6, collapseStep : 12 });
+			
+			while (i--) {
+				if (menuItems[i].className == "item") {
+					menuItems[i].details = menu.set(
+						N.DOM("ul.submenu", menuHolder)[i], 
+						menuItems[i], 
+						{ expanded : ((menuItems[i].rel == location.hash.substring(1)) ? true : false)}
+					);
+				}
+			}
+			N.Events.addEventListener(N.get("menu"), "click", function(e) {
+				target = N.Events.getTarget(e);
+				if (target.nodeName == "A" && target.className == "item") {
+					N.Events.preventDefault(e);
+					(!target.details) && (target.details = menu.set(target, target.getElementsByTagName("ul")[0]));
+					(target.details.expanded) ? menu.collapse(target.details) : menu.expand(target.details);
+				}
+			});
+			
+			N.Events.addEventListener(document, "click", function(e) {
+				N.Events.preventDefault(e);
+				var target = N.Events.getTarget(e);
+				if (target.nodeName === "A") {
+					var id = target.href.split("#");
+					(id[1] !== "") ? N.plugins.Anchor.scrollTo(0, N.DOM.getY(N.get(id[1]))) : N.plugins.Anchor.scrollTo(0, 0);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

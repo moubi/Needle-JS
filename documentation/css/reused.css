@@ -1,0 +1,209 @@
+/* HTML5 tags fix for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section { display: block; }
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+body {
+	background-color: #ececec; 
+	line-height: 1; 
+}
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a { outline: none; }
+.left { float: left !important; }
+.right { float: right !important; }
+.clear {
+	width: 0;
+	height: 0; 
+	clear: both !important; 
+}
+.center { margin: 0 auto !important; }
+.block { display: block !important; }
+.none { display: none; }
+.align_right { text-align: right; }
+
+/* TOP LINE */
+.top_line {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 0 0 1px 0;
+	border-bottom: 1px solid #aeab90;
+}
+.top_line div {
+	width: 100%;
+	height: 14px;
+	background-color: #333;
+}
+/* /TOP LINE */
+
+#container { padding: 45px 0 0 0; }
+
+/* HEADER */
+h1 { text-align: center; }
+#container header:first-child { 
+	width: 100%;
+	padding: 0 0 30px 0; 
+}
+#container header:first-child p { padding: 0 0 0 32px; }
+/* /HEADER */
+
+/* MENU */
+.menu {
+	border: 1px solid #2b2b2b;
+	background-color: #3c3c3c;
+}
+.menu > ul, .menu ul li ul { list-style-type: none; }
+.menu > ul > li { background-color: #2d2d2d; }
+.menu > ul > li > span {
+	display: block;
+	border-bottom: 1px solid #222;
+}
+.menu > ul > li > span > a { 
+	border-bottom: 1px solid #575757;
+	background-color: transparent !important; 
+}
+.menu > ul > li > span.flat { border-bottom: none; }
+.menu > ul > li > span.flat > a { border-bottom: none; }
+
+.menu ul li a {
+	display: block;
+	padding: 0 0 0 55px;
+	font-family: "Arimo", Arial, sans-serif;
+	font-size: 13px;
+	line-height: 37px;
+	font-weight: bold;
+	color: #dedddd;
+	text-decoration: none;
+}
+.menu ul li span a[rel=overview] { background: url(../img/icon_overview.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=pages] { background: url(../img/icon_pages.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=home] { background: url(../img/icon_home.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=about] { background: url(../img/icon_about.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=posts] { background: url(../img/icon_posts.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=results] { background: url(../img/icon_lists.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=gallery] { background: url(../img/icon_galleries.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=contact] { background: url(../img/icon_contact.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=sitemap] { background: url(../img/icon_sitemap.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=fair] { background: url(../img/icon_fair.png) 21px 50% no-repeat; }
+.menu ul li span a[rel=misc] { background: url(../img/icon_misc.png) 21px 50% no-repeat; }
+.menu ul li span a:hover { background-color: #333; }
+
+.menu > ul > li ul { background-color: #3c3c3c; }
+.menu > ul > li ul > li > span a {
+	height: 37px;
+	font-weight: normal; 
+	text-shadow: 0 1px 0 #151515;
+}
+.menu > ul > li ul > li > span {
+	position: relative; 
+	display: block; 
+}
+.menu > ul > li ul > li > span img {
+	position: absolute;
+	top: 12px;
+	left: 85%;
+}
+.menu > ul > li ul > li > span.selected {
+	border-top: 1px solid #222;
+	border-bottom: 1px solid #222;
+	background-color: #747474;
+	background: -moz-linear-gradient(top, #747474 0%, #555555 85%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #747474), color-stop(51%, #555555)); /* Chrome, Safari4+ */
+	background: -webkit-linear-gradient(top, #747474 0%, #555555 51%); /* Chrome10+, Safari5.1+ */
+	background: -o-linear-gradient(top, #747474 0%, #555555 51%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, #747474 0%, #555555 51%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#747474', endColorstr='#555555',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, #747474 0%, #555555 51%); /* W3C */
+	-moz-box-shadow: inset 0 1px 1px #999;
+	-webkit-box-shadow: inset 0 1px 1px #999;
+	box-shadow: inset 0 1px 1px #999;
+}
+.menu ul li ul li span.selected a { background-color: transparent; }
+
+.menu > ul > li ul li > ul { background-color: #333; }
+.menu > ul > li ul li > ul > li a {
+	padding: 0 0 0 70px;
+	font-size: 12px; 
+	line-height: 26px;
+	font-weight: normal; 
+	text-shadow: 0 1px 0 #151515;
+	color: #9e9d9d;
+	background: url(../img/menu_list_bullet.png) 55px 50% no-repeat;
+}
+.menu > ul > li ul li > ul > li a.selected, 
+.menu > ul > li ul li > ul > li a:hover { color: #dedddd; }
+/* /MENU */
+
+/* CONTENT */
+#content { }
+.content {
+	margin: 0 0 10px 0;
+	padding: 0 0 20px 0;
+	border: 1px solid #dcdcdc;
+	background-color: #fff;
+}
+h2, h3, h4, h5 { 
+	margin: 0 0 10px 0;
+	padding: 0 0 0 10px; 
+}
+.content ul {
+	display: block; 
+	padding: 10px 0 10px 20px;
+	list-style-type: none; 
+}
+.content ul li { padding: 0 20px 0 15px; }
+.content p { padding: 10px 20px; }
+.content div.pre {
+	margin: 10px 20px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	background-color: #ececec;
+	overflow: hidden;
+}
+.content div.pre:hover { width: 1024px; }
+
+.content img { border: 3px solid #ccc; }
+
+.content label {
+	display: block;
+	min-width: 10px;
+	padding: 12px 0 12px 20px;
+}
+/* /CONTENT */
+
+.rounded {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
+}

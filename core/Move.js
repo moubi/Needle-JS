@@ -36,7 +36,6 @@ Move.prototype.Move = function(configuration) {
  * 
  * @description Prepares element to move (by accepting configuration object) 
  * and starts its movement.
- * @note If we have same element with same configuration it will new create details object with every move call.
  * 
  * @param element HTMLElement|String Id (required)
  * @param configuration Object (optional) - configuration object as the one from the constructor
@@ -45,7 +44,22 @@ Move.prototype.Move = function(configuration) {
  * @returns void
  */
 Move.prototype.move = function(element, configuration, callback) {
-	this.start(new Details(NEEDLE.get(element), NEEDLE.objectMerge({ }, this.getPublicProperties(), configuration)), callback);
+	this.start(this.set(element, configuration), callback);
+};
+/**
+ * @method set
+ * @access public
+ * 
+ * @description Prepares element to move (by accepting configuration object).
+ * Handy method if we want to know what calculations are made before movement itself. 
+ * 
+ * @param element HTMLElement|String Id (required)
+ * @param configuration Object (optional) - configuration object as the one from the constructor
+ * 
+ * @returns Object
+ */
+Move.prototype.set = function(element, configuration) {
+	return new Details(NEEDLE.get(element), NEEDLE.objectMerge({ }, this.getPublicProperties(), configuration, true));
 };
 /**
  * @method start
@@ -69,8 +83,6 @@ Move.prototype.start = function(element, callback) {
  * @access public
  * 
  * @description Stops movement and executes callback function.
- * TODO element.cycling is not a good idea as it is problematic to put several
- * movements on a single element (all of them will have same "cycling" property)
  * 
  * @param element Details class Instance (required)
  * @param callback Function (optional)
@@ -79,7 +91,7 @@ Move.prototype.start = function(element, callback) {
  */
 Move.prototype.stop = function(element, callback) {
 	clearInterval(NEEDLE.get(element).cycling);
-	(typeof callback === "function") && callback.call(this);
+	(typeof callback === "function") && callback();
 };
 /**
  * @method cycling
@@ -117,7 +129,7 @@ function Details(element, configuration) {
 	this.configuration = configuration = _configure(element, configuration);
 	var lengthX = configuration.destination.left - parseFloat(element.style.left),  
 		lengthY = configuration.destination.top - parseFloat(element.style.top);
-	
+
 	this.element = element;
 	this.lengthX = Math.abs(lengthX);
 	this.lengthY = Math.abs(lengthY);

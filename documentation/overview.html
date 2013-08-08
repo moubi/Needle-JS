@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NeedleJS documentation</title>
+	<meta charset=UTF-8">
+	<meta name="keywords" content="javascript api, documentation, framework, javascript library, toolset" />
+	<meta name="description" content="Needle JS - an Object oriented javascript framework with class like syntax" />
+	<meta name="author" content="Мирослав Николов (@moubi)" />
+
+	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>	
+	<link rel="stylesheet" href="css/reused.css" />
+	<link rel="stylesheet" href="css/grid.css" />
+	<link rel="stylesheet" href="css/fonts.css" />
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+	<section id="container" class="td _32 center">
+		<header>
+			<h1 class="td _6 left"><a href="index.html" title="NewEvent theme logo"><img src="files/logo.jpg" alt="NewEvent logo" /></a></h1>
+			<p class="td _25 header_text left">
+				Purpose of this section is to help you learn how to use NeedleJS as a <strong>framework</strong>, work with <strong>core classes</strong>, use and create your own <strong>plugins</strong>.
+				Want to <strong>use other libraries</strong> - NeedleJS combines with <strong>no conflicts</strong>.
+			</p>
+			<div class="clear"></div>
+		</header>
+		<nav class="td _7 left">
+			<section class="td menu rounded _6">
+				<ul>
+					<li><span class="flat"><a rel="overview" href="index.html" title="About our framework">About</a></span></li>
+				</ul>
+			</section><br />	
+			<section id="menu" class="td menu rounded _6">
+				<ul>
+					<li><span><a rel="pages" href="#" title="Library API">API</a></span>
+						<ul>
+							<li><span><a rel="fair" class="item" href="#" title="Getting started">Get started</a></span>
+								<ul class="submenu">
+									<li><a href="overview.html#overview" title="Overview">Overview</a></li>
+									<li><a href="overview.html#events" title="Events">Events</a></li>
+									<li><a href="overview.html#dom" title="DOM">DOM</a></li>
+									<li><a href="overview.html#effects" title="Effects">Effects</a></li>
+								</ul>
+							</li>
+							<li><span><a rel="fair" class="item" href="#" title="Core classes">Core features</a></span>
+								<ul class="submenu">
+									<li><a href="needle.html" title="Needle.js features">Needle</a></li>
+									<li><a href="ajax.html" title="Using AJAX requests">AJAX</a></li>
+									<li><a href="dom.html" title="DOM and selector engine">DOM</a></li>
+									<li><a href="effects.html" title="Eye catching effects">Effects</a></li>
+									<li><a href="events.html" title="Working with event model">Events</a></li>
+									<li><a href="xml.html" title="Working with xml">XML</a></li>
+								</ul>
+							</li>
+							<li><span><a rel="results" class="item" href="#" title="Create and use plugins">Plugins</a></span>
+								<ul class="submenu">
+									<li><a href="create_plugins.html" title="Create plugins">Create</a></li>
+									<li><a href="extend.html" title="Extend plugins">Extend</a></li>
+									<li><a href="use_plugins.html" title="Use plugins">Use</a></li>
+								</ul>
+							</li>
+							<li><span><a rel="results" class="item" href="#" title="Core and plugins files">All files</a></span>
+								<ul class="submenu">
+									<li><a href="home_page_slideshow.html#home" title="Slideshow configuration">Slideshow</a></li>
+									<li><a href="home_page_widgets.html#home" title="Widget configuration">Widgets</a></li>
+									<li><a href="home_page_related.html#home" title="Related elements and features">Other elements</a></li>
+								</ul>
+							</li>
+							<li><span><a rel="about" href="#" title="Browsers support">Browsers</a></span></li>
+							<li><span><a rel="contact" href="#" title="Contacts and support">Contacts</a></span></li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</nav>
+		<div id="content" class="td _25 left">
+			<section class="content rounded">
+				<h2>Getting started with NeedleJS</h2>
+				<p>
+					In the section we will learn what is needed in order to start using NeedleJS. 
+				</p>
+			</section>
+			<section id="build" class="content rounded">
+				<h3>Include NeedleJS single file</h3>
+				<p>In order to initialize the framework you need to add just <strong>one js file</strong> in your page.</p>
+				<label>Here is how: </label>
+<div class="pre rounded">
+<pre class="td _32">
+&lt;body&gt;
+    <code class="comment">// Some html code goes here</code>
+    ...
+    &lt;script id=<code class="string">"needle"</code> src=<code class="string">"js/needlejs/core/Needle.js"</code>&gt;&lt;/script&gt;
+&lt;/body&gt;
+</pre>
+</div>
+				<p>
+					That's it. For anything else we can use NeedleJS features for requesting classes/modules. 
+				</p>
+				<p class="align_right"><a href="#" title="top">top</a></p>
+			</section>
+			<section class="content rounded">
+				<h3>Requesting additional modules</h3>
+				<p>
+					Now let's say we need handy functionality for manipulating our document. What shall we do?
+				</p>
+				<label>Request DOM class and selector engine:</label>
+<div class="pre rounded">
+<pre class="td _32">
+&lt;body&gt;
+    <code class="comment">// Some html code goes here</code>
+    ...
+    &lt;script id=<code class="string">"needle"</code> src=<code class="string">"js/needlejs/core/Needle.js"</code>&gt;&lt;/script&gt;
+    &lt;script&gt;
+        N.require(<code class="string">"Sizzle.js"</code>);
+        N.require(<code class="string">"DOM.js"</code>);
+        
+        N.onready(<code class="operator">function</code>() {
+            <code class="comment">// After requested files are loaded callback is executed</code>
+            N.DOM(<code class="string">"p.text"</code>); <code class="comment">// Getting all paragraphs with class "text"</code>
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+</pre>
+</div>
+				<p>
+					<strong>N.onready</strong> method loads all requested files in order and executes callback function onload.
+					You then can use these modules like <strong>N.&lt;ModuleName&gt;</strong>. Modules acts as ordinary constructor functions.
+				</p>
+				<p class="align_right"><a href="#" title="top">top</a></p>
+			</section>
+			<section class="content rounded">
+				<h3>Requesting custom plugins</h3>
+				<p>
+					NeedleJS comes with a lot of custom made plugins. It also allows you to create your own and adds them to the framework. 
+					Usualy they are placed in <strong>/plugins</strong> directory. 
+				</p>
+				<label>Request additional plugins:</label>
+<div class="pre rounded">
+<pre class="td _32">
+&lt;body&gt;
+    <code class="comment">// Some html code goes here</code>
+    ...
+    &lt;script id=<code class="string">"needle"</code> src=<code class="string">"js/needlejs/core/Needle.js"</code>&gt;&lt;/script&gt;
+    &lt;script&gt;
+        N.require(<code class="string">"Sizzle.js"</code>);
+        N.require(<code class="string">"DOM.js"</code>);
+        N.require(<code class="string">"js/needlejs/plugins/Anchor/Anchor.js"</code>);
+        
+        N.onready(<code class="operator">function</code>() {
+            <code class="operator">var</code> elements = N.DOM(<code class="string">"a.text"</code>); <code class="comment">// Getting all links with class "anchor"</code>
+            <code class="operator">var</code> length = elements.length;
+            
+            <code class="operator">while</code> (length--) {
+                elements[length].onclick = <code class="operator">function</code>() {
+                    <code class="comment">// Using Anchor plugin</code>
+                    N.plugins.Anchor.scrollTo(0, 0); <code class="comment">// Scroll to top on click</code>
+                };
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+</pre>
+</div>
+				<p>
+					No matter if you use plugins comming with NeedleJS or create your own - syntax of working with them is the same.
+					They as well act as constructor functions and can be accessed through <strong>N.plugins</strong> object like: <strong>N.plugins.&lt;MyPlugin&gt;</strong>  
+				</p>
+				<p class="align_right"><a href="#" title="top">top</a></p>
+			</section>
+			<section class="content rounded">
+				<h3>Creating your own plugins</h3>
+				<p>
+					No matter if you use NeedleJS for simple or more complex tasks you will probably need to organize your code in plugins.
+					Let's say that for example you want to implement <strong>MVC</strong>. You can create your <strong>Model, View</strong> and <strong>Controller</strong> classes as plugins.
+				</p>
+				<p>
+					Imagine you want to create plugin that helps you get all links with specific class and onclick brings you back to the top of the page (as the example from the previous section). <br />
+					We have to create js file and name it with the same name as our plugin/class inside - pick <strong>Toppper</strong>. 
+					So we have <strong>Toppper.js</strong> file created and placed in <strong>/plugins</strong> directory.
+				</p>
+				<label>Let's create our plugin (the class itself):</label>
+<div class="pre rounded">
+<pre class="td _32">
+N.plugins("Toppper", <code class="operator">function</code>() {
+<code class="operator">function</code> Toppper(links) {
+    <code class="operator">this</code>.Toppper(links);
+}
+Toppper.prototype.Toppper = <code class="operator">function</code>(links) {
+    if (N.isArray(links)) {
+        this.links = links;
+    }
+};
+Toppper.prototype.on = function() {
+    N.Events.addEventListener(document, "click", _eventHandler);
+};
+Toppper.prototype.off = function() {
+    N.Events.removeEventListener(document, "click", _eventHandler);
+};
+
+function _eventHandler(e) {
+    var target = N.Events.getTarget(e);
+    if (this.links.indexOf(target) !== -1) {
+        N.plugins.Anchor.scrollTo(0, 0);
+    }
+}
+
+<code class="operator">return</code> Toppper;
+});
+</pre>
+</div>
+				<p class="align_right"><a href="#" title="top">top</a></p>
+			</section>
+		</div>	
+		<div class="clear"></div>
+	</section>
+	<div class="top_line"><div></div></div>
+	<script id="needle" src="js/needlejs/core/Needle.js"></script>
+	<script>
+		N.require("Sizzle.js");
+		N.require("DOM.js");
+		N.require("Events.js");
+		N.require("Expandable.js");
+		N.require("js/needlejs/plugins/Anchor/Anchor.js");
+
+		N.onready(function() {
+			var menuHolder = N.get("menu"), 
+				menuItems = N.DOM("a.item", menuHolder), i = menuItems.length, 
+				menu = new N.Expandable({ expandStep : 6, collapseStep : 12 });
+			
+			while (i--) {
+				if (menuItems[i].className == "item") {
+					menuItems[i].details = menu.set(
+						N.DOM("ul.submenu", menuHolder)[i], 
+						menuItems[i], 
+						{ expanded : ((menuItems[i].rel == location.hash.substring(1)) ? true : false)}
+					);
+				}
+			}
+			N.Events.addEventListener(N.get("menu"), "click", function(e) {
+				target = N.Events.getTarget(e);
+				if (target.nodeName == "A" && target.className == "item") {
+					N.Events.preventDefault(e);
+					(!target.details) && (target.details = menu.set(target, target.getElementsByTagName("ul")[0]));
+					(target.details.expanded) ? menu.collapse(target.details) : menu.expand(target.details);
+				}
+			});
+			
+			N.Events.addEventListener(document, "click", function(e) {
+				N.Events.preventDefault(e);
+				var target = N.Events.getTarget(e);
+				if (target.nodeName === "A") {
+					var id = target.href.split("#");
+					(id[1] !== "") ? N.plugins.Anchor.scrollTo(0, N.DOM.getY(N.get(id[1]))) : N.plugins.Anchor.scrollTo(0, 0);
+				}
+			});
+		});
+	</script>
+</body>
+</html>
