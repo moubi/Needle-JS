@@ -78,7 +78,7 @@
 			<section class="content rounded">
 				<h2>Getting started with NeedleJS</h2>
 				<p>
-					In the section we will learn what is needed in order to start using NeedleJS. 
+					In this section we will learn what you will needed in order to start using NeedleJS. 
 				</p>
 			</section>
 			<section id="build" class="content rounded">
@@ -163,8 +163,8 @@
 </pre>
 </div>
 				<p>
-					No matter if you use plugins comming with NeedleJS or create your own - syntax of working with them is the same.
-					They as well act as constructor functions and can be accessed through <strong>N.plugins</strong> object like: <strong>N.plugins.&lt;MyPlugin&gt;</strong>  
+					No matter if you use plugins comming with NeedleJS or create your own - the syntax of working with them is the same.
+					Plugins act as constructor functions as well and can be accessed through <strong>N.plugins</strong> object like: <strong>N.plugins.&lt;MyPlugin&gt;</strong>  
 				</p>
 				<p class="align_right"><a href="#" title="top">top</a></p>
 			</section>
@@ -182,25 +182,29 @@
 				<label>Let's create our plugin (the class itself):</label>
 <div class="pre rounded">
 <pre class="td _32">
-N.plugins("Toppper", <code class="operator">function</code>() {
+N.plugins(<code class="string">"Toppper"</code>, <code class="operator">function</code>() {
+<code class="operator">var</code> _links = []; <code class="comment">// Private property to hold our links</code>
 <code class="operator">function</code> Toppper(links) {
     <code class="operator">this</code>.Toppper(links);
 }
+<code class="comment">// Constructor</code>
 Toppper.prototype.Toppper = <code class="operator">function</code>(links) {
-    if (N.isArray(links)) {
-        this.links = links;
+    <code class="operator">if</code> (N.isArray(links)) {
+        _links = links;
     }
 };
-Toppper.prototype.on = function() {
-    N.Events.addEventListener(document, "click", _eventHandler);
+<code class="comment">// Method to make our links point to the top of the page</code>
+Toppper.prototype.on = <code class="operator">function</code>() {
+    N.Events.addEventListener(document, <code class="string">"click"</code>, _eventHandler);
 };
-Toppper.prototype.off = function() {
-    N.Events.removeEventListener(document, "click", _eventHandler);
+<code class="comment">// Method to disable links pointing to the top of the page</code>
+Toppper.prototype.off = <code class="operator">function</code>() {
+    N.Events.removeEventListener(document, <code class="string">"click"</code>, _eventHandler);
 };
-
-function _eventHandler(e) {
-    var target = N.Events.getTarget(e);
-    if (this.links.indexOf(target) !== -1) {
+<code class="comment">// Private method allowing to on/off links</code>
+<code class="operator">function</code> _eventHandler(e) {
+    <code class="operator">var</code> target = N.Events.getTarget(e);
+    <code class="operator">if</code> (_links.indexOf(target) !== -1) {
         N.plugins.Anchor.scrollTo(0, 0);
     }
 }
@@ -209,6 +213,31 @@ function _eventHandler(e) {
 });
 </pre>
 </div>
+				<p>
+					Our plugin is created. Now lets change previous example, so that it uses this plugin.  
+				</p>
+<div class="pre rounded">
+<pre class="td _32">
+&lt;body&gt;
+    <code class="comment">// Some html code goes here</code>
+    ...
+    &lt;script id=<code class="string">"needle"</code> src=<code class="string">"js/needlejs/core/Needle.js"</code>&gt;&lt;/script&gt;
+    &lt;script&gt;
+        N.require(<code class="string">"Sizzle.js"</code>);
+        N.require(<code class="string">"DOM.js"</code>);
+        N.require(<code class="string">"js/needlejs/plugins/Toppper/Toppper.js"</code>);
+        
+        N.onready(<code class="operator">function</code>() {
+            <code class="operator">new</code> N.plugins.Toppper(N.DOM(<code class="string">"a.text"</code>)).on();
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+</pre>
+</div>
+				<p>
+					What we just did - we made new instance of Toppper on page load, passing all links with class of <strong>text</strong>.
+					At the end we called <strong>on</strong> method to activate new link behaviour.
+				</p>
 				<p class="align_right"><a href="#" title="top">top</a></p>
 			</section>
 		</div>	
