@@ -28,21 +28,14 @@
 		<nav class="td _7 left">
 			<section class="td menu rounded _6">
 				<ul>
-					<li><span class="flat"><a rel="overview" href="index.html" title="About our framework">About</a></span></li>
+					<li><span class="flat"><a rel="overview" href="#" title="About our framework">About</a></span></li>
 				</ul>
 			</section><br />	
 			<section id="menu" class="td menu rounded _6">
 				<ul>
 					<li><span><a rel="pages" href="#" title="Library API">API</a></span>
 						<ul>
-							<li><span><a rel="fair" class="item" href="#" title="Getting started">Get started</a></span>
-								<ul class="submenu">
-									<li><a href="overview.html#overview" title="Overview">Overview</a></li>
-									<li><a href="overview.html#events" title="Events">Events</a></li>
-									<li><a href="overview.html#dom" title="DOM">DOM</a></li>
-									<li><a href="overview.html#effects" title="Effects">Effects</a></li>
-								</ul>
-							</li>
+							<li><span><a rel="home" href="overview.html" title="Getting started">Get started</a></span></li>
 							<li><span><a rel="fair" class="item" href="#" title="Core classes">Core features</a></span>
 								<ul class="submenu">
 									<li><a href="needle.html" title="Needle.js features">Needle</a></li>
@@ -89,13 +82,10 @@
 				<div class="td _10 right">
 					<label>Classes in NeedleJS provide:</label>
 					<ul>
-						<li>Private methods</li>
-						<li>Public methods</li>
-						<li>Public properties</li>
-						<li>Private properties</li>
+						<li>Private properties and methods</li>
+						<li>Public properties and methods</li>
+						<li>Static properties and methods</li>
 						<li>Constants</li>
-						<li>Static methods</li>
-						<li>Static properties</li>
 						<li>Constructors</li>
 					</ul>
 				</div>
@@ -111,7 +101,7 @@
 				   </ul>
 			   </div>
 			   <div class="clear"></div>
-			   <p>If you want to learn more let's go to <a href="#" title="Getting started with NeedleJS">getting started</a> section</p>
+			   <p>If you want to learn more let's go to <a href="overview.html" title="Getting started with NeedleJS">getting started</a> section</p>
 				<p class="align_right"><a href="#" title="top">top</a></p>
 			</section>
 		</div>	
@@ -150,9 +140,9 @@
 			});
 			
 			N.Events.addEventListener(document, "click", function(e) {
-				N.Events.preventDefault(e);
+				//N.Events.preventDefault(e);
 				var target = N.Events.getTarget(e);
-				if (target.nodeName === "A") {
+				if (target.nodeName === "A" && target.href.indexOf("#") != -1) {
 					var id = target.href.split("#");
 					(id[1] !== "") ? N.plugins.Anchor.scrollTo(0, N.DOM.getY(N.get(id[1]))) : N.plugins.Anchor.scrollTo(0, 0);
 				}

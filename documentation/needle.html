@@ -35,6 +35,7 @@
 				<ul>
 					<li><span><a rel="pages" href="#" title="Library API">API</a></span>
 						<ul>
+							<li><span><a rel="home" href="overview.html" title="Getting started">Get started</a></span></li>
 							<li><span><a rel="fair" class="item" href="#" title="Core classes">Core features</a></span>
 								<ul class="submenu">
 									<li><a href="needle.html" title="Needle.js features">Needle</a></li>
@@ -310,9 +311,9 @@ N.onready(<code class="operator">function</code>() {
 			});
 			
 			N.Events.addEventListener(document, "click", function(e) {
-				N.Events.preventDefault(e);
+				//N.Events.preventDefault(e);
 				var target = N.Events.getTarget(e);
-				if (target.nodeName === "A") {
+				if (target.nodeName === "A" && target.href.indexOf("#") != -1) {
 					var id = target.href.split("#");
 					(id[1] !== "") ? N.plugins.Anchor.scrollTo(0, N.DOM.getY(N.get(id[1]))) : N.plugins.Anchor.scrollTo(0, 0);
 				}
