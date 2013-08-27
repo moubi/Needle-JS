@@ -38,10 +38,8 @@ DragDrop.prototype.DragDrop = function(box, handle) {
  */
 DragDrop.prototype.mouseMove = function(e) {
     if (this.mouseDownFlag) {
-    	_getMouseXY.call(this, e);
-    	this.box.style.top = this.objectWindow.y + this.delta.y + "px";
-    	this.box.style.left = this.objectWindow.x + this.delta.x + "px";
-
+    	this.mouseXY(e);
+    	NEEDLE.DOM.style(this.box, { top : this.objectWindow.y + this.delta.y + "px", left : this.objectWindow.x + this.delta.x + "px" });
         this.objectWindow.y += this.delta.y;
         this.objectWindow.x += this.delta.x;
     }
@@ -58,12 +56,10 @@ DragDrop.prototype.mouseMove = function(e) {
  */
 DragDrop.prototype.mouseDown = function(e) {
 	this.mouseDownFlag = true;
+	NEEDLE.DOM.style(this.box, { position : "absolute", zIndex : 10000 });
 	
-	this.box.style.position = "absolute"; 
-	this.box.style.zIndex = 10000;
 	this.objectWindow = { x : parseInt(this.box.style.left), y : parseInt(this.box.style.top) };
 	this.mousePos = this.mouse(e);
-	
 	return this;
 };
 /**
@@ -88,8 +84,7 @@ DragDrop.prototype.mouseUp = function() {
  * @returns current instance
  */
 DragDrop.prototype.open = function() {
-	this.box.style.top = NEEDLE.DOM.getY(this.box) + "px";
-	this.box.style.left = NEEDLE.DOM.getX(this.box) + "px";
+	NEEDLE.DOM.style(this.box, { top : NEEDLE.DOM.getY(this.box) + "px", left : NEEDLE.DOM.getX(this.box) + "px" });
 	return this;
 };
 /**
@@ -102,7 +97,7 @@ DragDrop.prototype.open = function() {
  * @returns current instance
  */
 DragDrop.prototype.mouse = function(e) {
-	if(NEEDLE.isIE) {
+	if (NEEDLE.isIE) {
 		DragDrop.prototype.mouse = function(e) { return { x : event.clientX + document.body.scrollLeft, y : event.clientY + document.body.scrollTop }; };
     } else {
     	DragDrop.prototype.mouse = function(e) { return { x : e.pageX, y : e.pageY }; };
@@ -110,15 +105,15 @@ DragDrop.prototype.mouse = function(e) {
 	return this.mouse(e);
 };
 /**
- * @method _getMouseXY
- * @access private
+ * @method mouseXY
+ * @access public
  * 
  * @description Gets mouse cursor's coordinates and sets internal variables.
  * 
  * @param e EventObject (required)
  * @returns void
  */
-function _getMouseXY(e) {
+DragDrop.prototype.mouseXY = function(e) {
 	var mouse = this.mouse(e);
     this.delta = { x : mouse.x - this.mousePos.x, y : mouse.y - this.mousePos.y };
     this.mousePos = { x : mouse.x, y : mouse.y };    

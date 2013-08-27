@@ -319,7 +319,7 @@ Needle.prototype.get = function(element) {
  * @returns Object
  */
 Needle.prototype.objectMerge = function() {
-	var obj = arguments[0], length = arguments.length, j = 0;
+	var obj = arguments[0], length = arguments.length, j = 0, deep = (typeof arguments[length-1] in { "undefined" : 0, "boolean" : 0 }) ? !!arguments[length-1] : false;
 
 	while (++j < length) {
 		if (typeof arguments[j] === "object") {
@@ -327,9 +327,9 @@ Needle.prototype.objectMerge = function() {
 			for (i in arguments[j]) {
 				switch (typeof arguments[j][i]) {
 					case "object": 
-						if (arguments[j][i] != null && arguments[length-1]) {
+						if (arguments[j][i] != null && deep) {
 							if (!arguments[j][i].nodeName) {
-								obj[i] = this.objectMerge(((typeof obj[i] === "undefined") ? (this.isArray(arguments[j][i]) ? [] : {}) : obj[i]), arguments[j][i]);
+								obj[i] = this.objectMerge(((typeof obj[i] === "undefined") ? (this.isArray(arguments[j][i]) ? [] : {}) : obj[i]), arguments[j][i], deep);
 								break;
 							}
 						}
@@ -348,7 +348,7 @@ Needle.prototype.objectMerge = function() {
  * @method isArray 
  * @access public
  * 
- * @description Checks is el is array.
+ * @description Checks if el is array.
  * 
  * @param el Object|Function|String|Integer|Float|Array|Date... (required)
  * 
@@ -419,6 +419,26 @@ Needle.prototype.extend = function(child, parent) {
 	// M.prototype.parent = parent.prototype;
 	child.prototype = new M();
 	child.prototype.constructor = child;
+};
+/**
+ * @method mix
+ * @access public
+ *
+ * @description Extends object with mixin methods.
+ * @note Useful if we want to several classes to share common logic (methods/properties).
+ *
+ * @param obj Constructor|Object (required)
+ * @param mixins Constructor|Object (required)
+ *
+ * @returns void
+ */
+Needle.prototype.mix = function(obj, mixins) {
+    if (typeof mixins === "object") {
+        var i;
+        for (i in mixins) {
+            obj[i] = mixins[i];
+        }
+    }
 };
 /**
  * @method transplant 
