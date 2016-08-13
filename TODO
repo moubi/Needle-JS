@@ -1,5 +1,5 @@
- 1) Ajax class needs to provide a way to make more than one requests with just one instance;
- x 2) Make all classes to inherit from NEEDLE.Object. In this case they may use its methods directly:
+ 1) Ajax class needs to be able to make more than one request with single instance;
+ x 2) Make all classes inherit from NEEDLE.Object. That way they may use its methods directly:
  	NEEDLE.inheritanceMediator(Ajax, Needle);
  	function Ajax() { }
- x 5) Making a script tag created and copy/append it for each request, instead of creating it over and over again;
+ x 5) Create script tag and copy/append it for each request, instead of creating it over and over again;
