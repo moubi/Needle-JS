@@ -2,12 +2,12 @@
 <html>
 <head>
 	<title>NeedleJS documentation</title>
-	<meta charset=UTF-8">
+	<meta charset="UTF-8">
 	<meta name="keywords" content="javascript api, documentation, framework, javascript library, toolset" />
 	<meta name="description" content="Needle JS - an Object oriented javascript framework with class like syntax" />
 	<meta name="author" content="Мирослав Николов (@moubi)" />
 
-	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>	
+	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/reused.css" />
 	<link rel="stylesheet" href="css/grid.css" />
 	<link rel="stylesheet" href="css/fonts.css" />
@@ -30,7 +30,7 @@
 				<ul>
 					<li><span class="flat"><a rel="overview" href="#" title="About our framework">About</a></span></li>
 				</ul>
-			</section><br />	
+			</section><br />
 			<section id="menu" class="td menu rounded _6">
 				<ul>
 					<li><span><a rel="pages" href="#" title="Library API">API</a></span>
@@ -77,7 +77,7 @@
 				<p>
 					The goal this framework sets is to help developers better organize their code using NeedleJS features or any general purpose library. Doing that by separating logic and complexity into different files (classes), which then can be requested dynamically and extended if needed.
 					Organizing code into "classes" helps you implement different object oriented design patters and benefits especially if you build large scale web applications.
-					Those familiar with PHP or Java will find NeedleJS syntax handy. 
+					Those familiar with PHP or Java will find NeedleJS syntax handy.
 				</p>
 				<div class="td _10 right">
 					<label>Classes in NeedleJS provide:</label>
@@ -104,7 +104,7 @@
 			   <p>If you want to learn more let's go to <a href="overview.html" title="Getting started with NeedleJS">getting started</a> section</p>
 				<p class="align_right"><a href="#" title="top">top</a></p>
 			</section>
-		</div>	
+		</div>
 		<div class="clear"></div>
 	</section>
 	<div class="top_line"><div></div></div>
@@ -117,15 +117,15 @@
 		N.require("js/needlejs/plugins/Anchor/Anchor.js");
 
 		N.onready(function() {
-			var menuHolder = N.get("menu"), 
-				menuItems = N.DOM("a.item", menuHolder), i = menuItems.length, 
+			var menuHolder = N.get("menu"),
+				menuItems = N.DOM("a.item", menuHolder), i = menuItems.length,
 				menu = new N.Expandable({ expandStep : 6, collapseStep : 12 });
-			
+
 			while (i--) {
 				if (menuItems[i].className == "item") {
 					menuItems[i].details = menu.set(
-						N.DOM("ul.submenu", menuHolder)[i], 
-						menuItems[i], 
+						N.DOM("ul.submenu", menuHolder)[i],
+						menuItems[i],
 						{ expanded : ((menuItems[i].rel == location.hash.substring(1)) ? true : false)}
 					);
 				}
@@ -138,7 +138,7 @@
 					(target.details.expanded) ? menu.collapse(target.details) : menu.expand(target.details);
 				}
 			});
-			
+
 			N.Events.addEventListener(document, "click", function(e) {
 				//N.Events.preventDefault(e);
 				var target = N.Events.getTarget(e);
