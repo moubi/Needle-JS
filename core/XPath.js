@@ -1,20 +1,22 @@
 NEEDLE.transplant("XPath", function() {
 // Extends its prototype with NEEDLE.Object's prototype
 NEEDLE.extend(XPath, NEEDLE.Object);
+
 /**
- * @class XPath 
- * 
+ * @class XPath
+ *
  */
 function XPath() {}
+
 /**
  * @method selectSingleNode
  * @access public static
- * 
+ *
  * @description Gets single node based on search criteria within a node.
- * 
+ *
  * @param root XMLNode (required)
  * @param string String (required)
- * 
+ *
  * @returns XMLNode
  */
 XPath.selectSingleNode = function(root, string) {
@@ -28,15 +30,16 @@ XPath.selectSingleNode = function(root, string) {
 	}
 	return XPath.selectSingleNode(root, string);
 };
+
 /**
  * @method selectNodes
  * @access public static
- * 
+ *
  * @description Gets nodes collection based on search criteria within a node.
- * 
+ *
  * @param root XMLNode (required)
  * @param string String (required)
- * 
+ *
  * @returns Array
  */
 XPath.selectNodes = function(root, string) {

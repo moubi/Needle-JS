@@ -1,41 +1,45 @@
 NEEDLE.transplant("Ajax", function() {
 // Extends its prototype with NEEDLE.Object's prototype
 NEEDLE.extend(Ajax, NEEDLE.Object);
+
 /**
- * @class Ajax 
- * 
+ * @class Ajax
+ *
  */
 function Ajax() {
 	this.Ajax();
 }
+
 /**
  * @constructor Ajax
  * @access public
- * 
+ *
  * @returns void
  */
 Ajax.prototype.Ajax = function() {
 	this.xhr = null;
 };
+
 /**
  * @method isSupported
  * @access public
- * 
- * @description Checks if XMLHttpRequest is present (supported) 
+ *
+ * @description Checks if XMLHttpRequest is present (supported)
  * by the current browser.
- * 
+ *
  * @returns Boolean
  */
 Ajax.prototype.isSupported = function() {
 	return (typeof XMLHttpRequest != "undefined");
 };
+
 /**
  * @method request
  * @access public
- * 
+ *
  * @description Opens get or post connection to the server.
  * Sends and receives response. Calls callback function.
- * 
+ *
  * @param url String (required)
  * @param method String (get|post) (required)
  * @param callback Function (required)
@@ -44,40 +48,43 @@ Ajax.prototype.isSupported = function() {
  */
 Ajax.prototype.request = function(url, method, callback, params) {
 	_xhrInstance.call(this);
-	this.xhr.onreadystatechange = function() { 
-		_callback.call(this, callback); 
+	this.xhr.onreadystatechange = function() {
+		_callback.call(this, callback);
 	};
 	_openConnection.call(this, method, url, params);
 	return this.xhr;
 };
+
 /**
  * @method getReadyState
  * @access public
- * 
+ *
  * @description Returns readyState code of the current request.
- * 
+ *
  * @returns Integer
  */
 Ajax.prototype.getReadyState = function() {
     return this.xhr.readyState;
 };
+
 /**
  * @method getStatusCode
  * @access public
- * 
+ *
  * @description Returns status code of the current request.
- * 
+ *
  * @returns Integer
  */
 Ajax.prototype.getStatusCode = function() {
     return this.xhr.status;
 };
+
 /**
  * @method getResponseText
  * @access public
- * 
+ *
  * @description Returns responseText of the current request if it has been received.
- * 
+ *
  * @returns String|void
  */
 Ajax.prototype.getResponseText = function() {
@@ -85,12 +92,13 @@ Ajax.prototype.getResponseText = function() {
         return this.xhr.responseText;
     }
 };
+
 /**
  * @method getResponseXML
  * @access public
- * 
+ *
  * @description Returns response XML of the current request if it has been received.
- * 
+ *
  * @returns String|void
  */
 Ajax.prototype.getResponseXML = function() {
@@ -98,35 +106,38 @@ Ajax.prototype.getResponseXML = function() {
         return this.xhr.responseXML;
     }
 };
+
 /**
  * @method abort
  * @access public
- * 
+ *
  * @description Aborts current request.
- * 
+ *
  * @returns void
  */
 Ajax.prototype.abort = function() {
 	(this.xhr != null) && this.xhr.abort();
 };
+
 /**
  * @method getRequest
  * @access public
- * 
+ *
  * @description Returns current XMLHttpRequest instance.
- * 
+ *
  * @returns XMLHttpRequest instance
  */
 Ajax.prototype.getRequest = function() {
 	return this.xhr;
 };
 
+
 /**
  * @method _openConnection
  * @access private
- * 
+ *
  * @description Opens GET or POST connection to the server.
- * 
+ *
  * @param method String (get|post) (required)
  * @param url String (required)
  * @param params String (optional)
@@ -144,12 +155,13 @@ function _openConnection(method, url, params) {
 			alert("Specify data conection method (post or get)");
 	}
 }
+
 /**
  * @method _callback
  * @access private
- * 
+ *
  * @description Executes callback function if request is finished successfully.
- * 
+ *
  * @param fn Function (optional)
  * @returns void
  */
@@ -160,12 +172,13 @@ function _callback(fn) {
         }
     }
 }
+
 /**
  * @method _queryGet
  * @access private
- * 
+ *
  * @description Opens GET connection to the server.
- * 
+ *
  * @param url String (required)
  * @returns void
  */
@@ -177,12 +190,13 @@ function _queryGet(url) {
         throw ex;
     }
 }
+
 /**
  * @method _queryPost
  * @access private
- * 
+ *
  * @description Opens POST connection to the server and passes parameters (name=value).
- * 
+ *
  * @param url String (required)
  * @param query String (required)
  * @returns void
@@ -199,12 +213,13 @@ function _queryPost(url, query) {
         throw ex;
     }
 }
+
 /**
  * @method _xhrInstance
  * @access private
- * 
+ *
  * @description Makes XMLHttpRequest instance if supported.
- * 
+ *
  * @returns void
  */
 function _xhrInstance() {

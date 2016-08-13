@@ -1,75 +1,80 @@
 NEEDLE.transplant("Move", function() {
 // Extends its prototype with NEEDLE.Object's prototype
 NEEDLE.extend(Move, NEEDLE.Object);
+
 /**
- * @class Move 
- * 
+ * @class Move
+ *
  */
 function Move(configuration) {
 	this.Move(configuration);
 }
+
 /**
  * @constructor Move
  * @access public
- * 
+ *
  * @param configuration Object (optional)
  * configuration.destination Object - left and right coordinates to go to
  * configuration.direction String - x|y
  * configuration.interval Integer - interval for setInterval
  * configuration.length Integer - length of path
  * configuration.step Integer - step length for each move
- * 
+ *
  * @returns void
  */
 Move.prototype.Move = function(configuration) {
 	if (typeof configuration === "object") {
 		this.destination = configuration.destination || null;
 		this.direction = configuration.direction || "x";
-		this.interval = configuration.interval || 15; 
-		this.length = configuration.length || 250; 
-		this.step = configuration.step || 3; 
+		this.interval = configuration.interval || 15;
+		this.length = configuration.length || 250;
+		this.step = configuration.step || 3;
 	}
 };
+
 /**
  * @method move
  * @access public
- * 
- * @description Prepares element to move (by accepting configuration object) 
+ *
+ * @description Prepares element to move (by accepting configuration object)
  * and starts its movement.
- * 
+ *
  * @param element HTMLElement|String Id (required)
  * @param configuration Object (optional) - configuration object as the one from the constructor
  * @param callback Function (optional)
- * 
+ *
  * @returns void
  */
 Move.prototype.move = function(element, configuration, callback) {
 	this.start(this.set(element, configuration), callback);
 };
+
 /**
  * @method set
  * @access public
- * 
+ *
  * @description Prepares element to move (by accepting configuration object).
- * Handy method if we want to know what calculations are made before movement itself. 
- * 
+ * Handy method if we want to know what calculations are made before movement itself.
+ *
  * @param element HTMLElement|String Id (required)
  * @param configuration Object (optional) - configuration object as the one from the constructor
- * 
+ *
  * @returns Object
  */
 Move.prototype.set = function(element, configuration) {
 	return new Details(NEEDLE.get(element), NEEDLE.objectMerge({ }, this.getPublicProperties(), configuration, true));
 };
+
 /**
  * @method start
  * @access public
- * 
+ *
  * @description Starts moving the element by cycling with setInterval function.
- * 
+ *
  * @param element Details class Instance (required)
  * @param callback Function (optional)
- * 
+ *
  * @returns void
  */
 Move.prototype.start = function(element, callback) {
@@ -78,30 +83,32 @@ Move.prototype.start = function(element, callback) {
 		that.cycling(element, callback);
 	}, element.configuration.interval);
 };
+
 /**
  * @method stop
  * @access public
- * 
+ *
  * @description Stops movement and executes callback function.
- * 
+ *
  * @param element Details class Instance (required)
  * @param callback Function (optional)
- * 
+ *
  * @returns void
  */
 Move.prototype.stop = function(element, callback) {
 	clearInterval(NEEDLE.get(element).cycling);
 	(typeof callback === "function") && callback();
 };
+
 /**
  * @method cycling
  * @access public
- * 
+ *
  * @description Executes on each setInterval cycle. Moves the element.
- * 
+ *
  * @param element Details class Instance (required)
  * @param callback Function (optional)
- * 
+ *
  * @returns void
  */
 Move.prototype.cycling = function(element, callback) {
@@ -114,20 +121,21 @@ Move.prototype.cycling = function(element, callback) {
 	}
 };
 
+
 /**
  * @class Details
  * @access private
- * 
+ *
  * @description Sets object with details regarding current movement.
- * 
+ *
  * @param element HTMLElement (required)
  * @param configuration Object (required)
- * 
+ *
  * @returns void
  */
 function Details(element, configuration) {
 	this.configuration = configuration = _configure(element, configuration);
-	var lengthX = configuration.destination.left - parseFloat(element.style.left),  
+	var lengthX = configuration.destination.left - parseFloat(element.style.left),
 		lengthY = configuration.destination.top - parseFloat(element.style.top);
 
 	this.element = element;
@@ -140,20 +148,21 @@ function Details(element, configuration) {
 	this.stepY = (lengthY > 0) ? Math.abs(this.stepY) : this.stepY*-1;
 	this.sign = (configuration.length > 0) ? 1 : -1;
 }
+
 /**
  * @method _configure
  * @access private
- * 
+ *
  * @description Prepares element for a movement by editing its style.
- * 
+ *
  * @param element HTMLElement (required)
  * @param configuration Object (required)
- * 
+ *
  * @returns void
  */
 function _configure(element, configuration) {
-	var style = element.style, 
-		startLeft = (style.left) ? parseFloat(style.left) : element.offsetLeft, 
+	var style = element.style,
+		startLeft = (style.left) ? parseFloat(style.left) : element.offsetLeft,
 		startTop = (style.top) ? parseFloat(style.top) : element.offsetTop;
 
 	style.position = "absolute";
@@ -162,21 +171,22 @@ function _configure(element, configuration) {
 
 	if (!configuration.destination) {
 		configuration.destination = {
-			left : (configuration.direction == "x") ? startLeft + configuration.length : startLeft, 
+			left : (configuration.direction == "x") ? startLeft + configuration.length : startLeft,
 			top : (configuration.direction == "y") ? startTop + configuration.length : startTop
 		};
 	}
 	return configuration;
 }
+
 /**
  * @method _setPos
  * @access private
- * 
+ *
  * @description Set HTML element's new position (for the current cycle).
- * 
+ *
  * @param element Details class Instance (required)
  * @param params Object (required) - object containing parameters for the movement
- * 
+ *
  * @returns void
  */
 function _setPos(element, params) {
