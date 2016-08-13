@@ -1,7 +1,7 @@
 NEEDLE.plug("ColorsTransition", function() {
 /**
- * @class ColorsTransition 
- * 
+ * @class ColorsTransition
+ *
  */
 function ColorsTransition(config) {
 	this.ColorsTransition(config);
@@ -14,15 +14,15 @@ ColorsTransition.attributeValue = "color_transition";	/* Element attribute value
 
 /**
  * @constructor ColorsTransition
- * @access public 
- * 
+ * @access public
+ *
  * @param config Object (optional)
- * 
+ *
  * @returns void
  */
 ColorsTransition.prototype.ColorsTransition = function(config) {
 	config = (typeof config === "object") ? config : {};
-	this.to = config.to || "color"; 
+	this.to = config.to || "color";
 	this.tag = config.tag || ColorsTransition.tag;
 	this.attribute = config.attribute || ColorsTransition.attribute;
 	this.attributeValue = config.attributeValue || ColorsTransition.attributeValue;
@@ -30,17 +30,18 @@ ColorsTransition.prototype.ColorsTransition = function(config) {
 	this.elements = NEEDLE.DOM.getElementsByAttribute(this.attribute, this.attributeValue, document, this.tag);
 	_init.call(this);
 };
+
 /**
  * @method _init
- * @access private 
- * 
- * @description Initializes events to start and stop transition at. 
- * 
+ * @access private
+ *
+ * @description Initializes events to start and stop transition at.
+ *
  * @returns void
  */
 function _init() {
 	var that = this;
-	
+
 	NEEDLE.Events.addEventListener(document, "mouseover", function(e) {
 		var target = NEEDLE.Events.getTarget(e);
 		_execute.call(that, target, "forward");
@@ -50,15 +51,16 @@ function _init() {
 		_execute.call(that, target, "backward");
 	});
 }
+
 /**
  * @method _execute
- * @access private 
- * 
- * @description Initializes events to start and stop transition at. 
- * 
+ * @access private
+ *
+ * @description Initializes events to start and stop transition at.
+ *
  * @param target DOMElement (required)
  * @param direction - forward|backward (optional)
- * 
+ *
  * @returns void
  */
 function _execute(target, direction) {

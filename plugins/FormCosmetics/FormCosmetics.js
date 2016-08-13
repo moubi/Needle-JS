@@ -1,43 +1,46 @@
 NEEDLE.plug("FormCosmetics", function() {
-	
+
 FormCosmetics.ELEMENTS = ["radio", "select", "checkbox"];
-FormCosmetics.CLASSES = {radio : {checked : "fc_radio fc_bg_bottom", unchecked : "fc_radio fc_bg_top"}, 
-						select : {holder : "fc_select", left : "fc_select_left", right : "fc_select_right", 
-									ul : "fc_select_options", closed : "fc_hidden", opened : "fc_visible", 
-									choice : "fc_select_choice"}, 
+FormCosmetics.CLASSES = {radio : {checked : "fc_radio fc_bg_bottom", unchecked : "fc_radio fc_bg_top"},
+						select : {holder : "fc_select", left : "fc_select_left", right : "fc_select_right",
+									ul : "fc_select_options", closed : "fc_hidden", opened : "fc_visible",
+									choice : "fc_select_choice"},
 						checkbox : {checked : "fc_checkbox fc_bg_bottom", unchecked : "fc_checkbox fc_bg_top"}};
 FormCosmetics.FORMS_CLASS = "cosmetics";
+
 /**
- * @class FormCosmetics 
+ * @class FormCosmetics
  * TODO Having better way of setting a callback function.
- * 
+ *
  */
 function FormCosmetics(configuration) {
 	this.FormCosmetics(configuration);
 }
+
 /**
  * @constructor FormCosmetics
- * @access public 
- * 
+ * @access public
+ *
  * @param configuration Object (optional)
- * 
+ *
  * @returns void
  */
 FormCosmetics.prototype.FormCosmetics = function(configuration) {
 	this.forms = [];
 	this.formClass = configuration.formClass || FormCosmetics.FORMS_CLASS;
 	this.elements = (!NEEDLE.isArray(configuration.elements)) ? FormCosmetics.ELEMENTS : configuration.elements;
-	
+
 	_init.call(this);
 };
+
 /**
  * @method checkbox
- * @access public 
- * 
+ * @access public
+ *
  * @description Gets all checkboxes within a form element.
- * 
+ *
  * @param form HTMLFormElement (required)
- * 
+ *
  * @returns void
  */
 FormCosmetics.prototype.checkbox = function(form) {
@@ -49,33 +52,35 @@ FormCosmetics.prototype.checkbox = function(form) {
 		}
 	}
 };
+
 /**
  * @method radio
- * @access public 
- * 
+ * @access public
+ *
  * @description Gets all radiobuttons within a form element.
- * 
+ *
  * @param form HTMLFormElement (required)
- * 
+ *
  * @returns void
  */
 FormCosmetics.prototype.radio = function(form) {
 	if (typeof form.index != "undefined") {
 		var radios = NEEDLE.DOM.getElementsByAttribute("type", "radio", form, "input"), l = radios.length, i;
-	
+
 		for (i = 0; i < l; i++) {
 			this.setSingleRadio(radios[i], form);
 		}
 	}
 };
+
 /**
  * @method select
- * @access public 
- * 
+ * @access public
+ *
  * @description Gets all selects within a form element.
- * 
+ *
  * @param form HTMLFormElement (required)
- * 
+ *
  * @returns void
  */
 FormCosmetics.prototype.select = function(form) {
@@ -89,22 +94,23 @@ FormCosmetics.prototype.select = function(form) {
 		}
 	}
 };
+
 /**
  * @method setSingleCheckbox
- * @access public 
- * 
+ * @access public
+ *
  * @description Replaces checkbox with a beauty version and imitate it.
- * 
+ *
  * @param checkbox HTMLCheckboxElement (required)
  * @param form HTMLFormElement (required)
- * 
+ *
  * @returns void
  */
 FormCosmetics.prototype.setSingleCheckbox = function(checkbox, form) {
 	if (typeof form != "undefined") {
 		if (typeof form.index != "undefined") {
-			var beautyVersion = _beautifyCheckbox(checkbox); 
-			
+			var beautyVersion = _beautifyCheckbox(checkbox);
+
 			_setElementIndex.call(this, beautyVersion, form, "checkbox");
 			(beautyVersion.checked) && _imitateCheckbox(beautyVersion);
 			_attachEventCheckbox(beautyVersion);
@@ -115,22 +121,23 @@ FormCosmetics.prototype.setSingleCheckbox = function(checkbox, form) {
 		}
 	}
 };
+
 /**
  * @method setSingleRadio
- * @access public 
- * 
+ * @access public
+ *
  * @description Replaces radiobutton with a beauty version and imitate it.
- * 
+ *
  * @param radio HTMLRadiobuttonElement (required)
  * @param form HTMLFormElement (required)
- * 
+ *
  * @returns void
  */
 FormCosmetics.prototype.setSingleRadio = function(radio, form) {
 	if (typeof form != "undefined") {
 		if (typeof form.index != "undefined") {
-			var beautyVersion = _beautifyRadio(radio); 
-			
+			var beautyVersion = _beautifyRadio(radio);
+
 			_setElementIndex.call(this, beautyVersion, form, "radio");
 			(beautyVersion.checked) && _imitateRadio(beautyVersion);
 			_attachEventRadio.call(this, beautyVersion, form);
@@ -141,22 +148,23 @@ FormCosmetics.prototype.setSingleRadio = function(radio, form) {
 		}
 	}
 };
+
 /**
  * @method setSingleSelect
- * @access public 
- * 
+ * @access public
+ *
  * @description Replaces selectbox with a beauty version and imitate it.
- * 
+ *
  * @param select HTMLSelectElement (required)
  * @param form HTMLFormElement (required)
- * 
+ *
  * @returns void
  */
 FormCosmetics.prototype.setSingleSelect = function(select, form) {
 	if (typeof form != "undefined") {
 		if (typeof form.index != "undefined") {
-			var beautyVersion = _beautifySelect(select), 
-				options = select.getElementsByTagName("option"); 
+			var beautyVersion = _beautifySelect(select),
+				options = select.getElementsByTagName("option");
 
 			_setElementIndex.call(this, beautyVersion, form, "select");
 			if (options.length > 0) {
@@ -173,42 +181,45 @@ FormCosmetics.prototype.setSingleSelect = function(select, form) {
 		}
 	}
 };
+
 /**
  * @method addForm
- * @access public 
- * 
+ * @access public
+ *
  * @description Adds new form element to already beautified forms.
- * 
+ *
  * @param form HTMLFormElement (required)
- * 
+ *
  * @returns void
  */
 FormCosmetics.prototype.addForm = function(form) {
 	_setFormElements.call(this, NEEDLE.get(form));
 };
+
 /**
  * @method _init
- * @access private 
- * 
+ * @access private
+ *
  * @description Initializes the plugin.
- * 
+ *
  * @returns void
  */
 function _init() {
-	var forms = NEEDLE.DOM.getElementsByClassName(this.formClass, document, "form"), j = forms.length; 
+	var forms = NEEDLE.DOM.getElementsByClassName(this.formClass, document, "form"), j = forms.length;
 
 	while (j--) {
 		_setFormElements.call(this, forms[j]);
 	}
 }
+
 /**
  * @method _setFormElements
- * @access private 
- * 
+ * @access private
+ *
  * @description Sets form elements in the plugins.
- * 
+ *
  * @param form HTMLFormElement (required)
- * 
+ *
  * @returns void
  */
 function _setFormElements(form) {
@@ -219,14 +230,15 @@ function _setFormElements(form) {
 		(NEEDLE.inArray(this.elements[i], FormCosmetics.ELEMENTS)) && this[this.elements[i]](form);
 	}
 }
+
 /**
  * @method _beautifyCheckbox
- * @access private 
- * 
+ * @access private
+ *
  * @description Creates beautified version of the checkbox.
- * 
+ *
  * @param checkbox HTMLCheckboxElement (required)
- * 
+ *
  * @returns HTMLElement (beautified version)
  */
 function _beautifyCheckbox(checkbox) {
@@ -234,32 +246,34 @@ function _beautifyCheckbox(checkbox) {
 	(checkbox.id) && (beautyVersion.id = checkbox.id);
 	beautyVersion.checked = checkbox.checked;
 	beautyVersion.name = checkbox.name;
-	
+
 	NEEDLE.DOM.insertBefore(beautyVersion, checkbox);
 	return beautyVersion;
 }
+
 /**
  * @method _imitateCheckbox
- * @access private 
- * 
+ * @access private
+ *
  * @description Creates hidden input field to imitate checkbox state.
- * 
+ *
  * @param beautyVersion HTMLElement (beautified version) (required)
- * 
+ *
  * @returns void
  */
 function _imitateCheckbox(beautyVersion) {
 	beautyVersion.imitation = NEEDLE.DOM.createPlus("input", { type : "hidden", name : beautyVersion.name, value : "on" });
 	NEEDLE.DOM.insertBefore(beautyVersion.imitation, beautyVersion);
 }
+
 /**
  * @method _attachEventCheckbox
- * @access private 
- * 
+ * @access private
+ *
  * @description Attaches event listener function.
- * 
+ *
  * @param beautyVersion HTMLElement (beautified version) (required)
- * 
+ *
  * @returns void
  */
 function _attachEventCheckbox(beautyVersion) {
@@ -275,14 +289,15 @@ function _attachEventCheckbox(beautyVersion) {
 		(typeof beautyVersion.callback === "function") && beautyVersion.callback();
 	};
 }
+
 /**
  * @method _beautifyRadio
- * @access private 
- * 
+ * @access private
+ *
  * @description Creates beautified version of the radiobutton.
- * 
+ *
  * @param radio HTMLRadiobuttonElement (required)
- * 
+ *
  * @returns HTMLElement (beautified version)
  */
 function _beautifyRadio(radio) {
@@ -291,32 +306,34 @@ function _beautifyRadio(radio) {
 	beautyVersion.checked = radio.checked;
 	beautyVersion.name = radio.name;
 	beautyVersion.value = radio.value;
-	
+
 	NEEDLE.DOM.insertBefore(beautyVersion, radio);
 	return beautyVersion;
 }
+
 /**
  * @method _imitateRadio
- * @access private 
- * 
+ * @access private
+ *
  * @description Creates hidden input field to imitate radiobutton state.
- * 
+ *
  * @param beautyVersion HTMLElement (beautified version) (required)
- * 
+ *
  * @returns void
  */
 function _imitateRadio(beautyVersion) {
 	beautyVersion.imitation = NEEDLE.DOM.createPlus("input", { type : "hidden", name : beautyVersion.name, value : beautyVersion.value });
 	NEEDLE.DOM.insertBefore(beautyVersion.imitation, beautyVersion);
 }
+
 /**
  * @method _attachEventRadio
- * @access private 
- * 
+ * @access private
+ *
  * @description Attaches event listener function.
- * 
+ *
  * @param beautyVersion HTMLElement (beautified version) (required)
- * 
+ *
  * @returns void
  */
 function _attachEventRadio(beautyVersion, form) {
@@ -331,15 +348,16 @@ function _attachEventRadio(beautyVersion, form) {
 		(typeof beautyVersion.callback === "function") && beautyVersion.callback();
 	};
 }
+
 /**
  * @method _unselectSelectedRadio
- * @access private 
- * 
+ * @access private
+ *
  * @description Unselects radiobuttons within same group.
- * 
+ *
  * @param form HTMLFormElement (required)
  * @param groupName String (required)
- * 
+ *
  * @returns void
  */
 function _unselectSelectedRadio(form, groupName) {
@@ -354,24 +372,25 @@ function _unselectSelectedRadio(form, groupName) {
 		}
 	}
 }
+
 /**
  * @method _beautifySelect
- * @access private 
- * 
+ * @access private
+ *
  * @description Creates beautified version of the selectbox.
- * 
+ *
  * @param select HTMLSelectElement (required)
- * 
+ *
  * @returns HTMLElement (beautified version)
  */
 function _beautifySelect(select) {
 	var beautyVersion = NEEDLE.DOM.createPlus("span", { "class" : FormCosmetics.CLASSES.select.holder });
 
 	beautyVersion.left = NEEDLE.DOM.createPlus("span", { "class" : FormCosmetics.CLASSES.select.left }),
-	beautyVersion.right = NEEDLE.DOM.createPlus("span", { "class" : FormCosmetics.CLASSES.select.right }), 
-	beautyVersion.choice = NEEDLE.DOM.createPlus("span", { "class" : FormCosmetics.CLASSES.select.choice }), 
+	beautyVersion.right = NEEDLE.DOM.createPlus("span", { "class" : FormCosmetics.CLASSES.select.right }),
+	beautyVersion.choice = NEEDLE.DOM.createPlus("span", { "class" : FormCosmetics.CLASSES.select.choice }),
 	clear = NEEDLE.DOM.create("span");
-	
+
 	NEEDLE.DOM.setStyle(clear, { display : "block", clear : "both" });
 	(select.id) && (beautyVersion.id = select.id);
 	beautyVersion.selected = {value : null, text : null};
@@ -390,34 +409,35 @@ function _beautifySelect(select) {
 
 	return beautyVersion;
 }
+
 /**
  * @method _beautifySelectOptions
- * @access private 
- * 
+ * @access private
+ *
  * @description Creates beautified version of the options within selectbox.
- * 
+ *
  * @param beautyVersion HTMLElement (beautified version) (required)
  * @param options Array (required)
- * 
+ *
  * @returns void
  */
 function _beautifySelectOptions(beautyVersion, options) {
 	var length = options.length, i;
-	
+
 	beautyVersion.ul = NEEDLE.DOM.createPlus("ul", { "class" : FormCosmetics.CLASSES.select.ul + " " +  FormCosmetics.CLASSES.select.closed});
 	beautyVersion.ul.li = [];
 	beautyVersion.selected = {value : options[0].value, text : options[0].innerHTML};
 
-	for (i = 0; i < length; i++) { 
+	for (i = 0; i < length; i++) {
 		beautyVersion.ul.li[i] = NEEDLE.DOM.create("li");
 		beautyVersion.options[i] = NEEDLE.DOM.createPlus("a", { href : "javascript:void(0)", title : options[i].value });
 		beautyVersion.options[i].value = options[i].value;
 		beautyVersion.options[i].text = options[i].innerHTML;
-			
+
 		beautyVersion.options[i].innerHTML = options[i].innerHTML;
 		NEEDLE.DOM.add(beautyVersion.options[i], beautyVersion.ul.li[i]);
 		NEEDLE.DOM.add(beautyVersion.ul.li[i], beautyVersion.ul);
-		
+
 		if (options[i].selected) {
 			beautyVersion.selected = { value : options[i].value, text : options[i].innerHTML };
 		}
@@ -425,28 +445,30 @@ function _beautifySelectOptions(beautyVersion, options) {
 	beautyVersion.choice.innerHTML = beautyVersion.selected.text;
 	NEEDLE.DOM.add(beautyVersion.ul, beautyVersion);
 }
+
 /**
  * @method _imitateSelect
- * @access private 
- * 
+ * @access private
+ *
  * @description Creates hidden input field to imitate selectbox state.
- * 
+ *
  * @param beautyVersion HTMLElement (beautified version) (required)
- * 
+ *
  * @returns void
  */
 function _imitateSelect(beautyVersion) {
 	beautyVersion.imitation = NEEDLE.DOM.createPlus("input", { type : "hidden", name : beautyVersion.name, value : beautyVersion.selected.value });
 	NEEDLE.DOM.insertBefore(beautyVersion.imitation, beautyVersion);
 }
+
 /**
  * @method _attachEventSelect
- * @access private 
- * 
+ * @access private
+ *
  * @description Attaches event listener function.
- * 
+ *
  * @param beautyVersion HTMLElement (beautified version) (required)
- * 
+ *
  * @returns void
  */
 function _attachEventSelect(beautyVersion) {
@@ -455,14 +477,15 @@ function _attachEventSelect(beautyVersion) {
 		beautyVersion.opened = !beautyVersion.opened;
 	};
 }
+
 /**
  * @method _attachEventSelectOptions
- * @access private 
- * 
+ * @access private
+ *
  * @description Attaches event listener function for option elements within selectbox.
- * 
+ *
  * @param beautyVersion HTMLElement (beautified version) (required)
- * 
+ *
  * @returns void
  */
 function _attachEventSelectOptions(beautyVersion) {
@@ -477,29 +500,31 @@ function _attachEventSelectOptions(beautyVersion) {
 		};
 	}
 }
+
 /**
  * @method _setElementIndex
- * @access private 
- * 
+ * @access private
+ *
  * @description Sets element index.
- * 
+ *
  * @param element HTMLElement (required)
  * @param form HTMLFormElement (required)
  * @param type String (required)
- * 
+ *
  * @returns void
  */
 function _setElementIndex(element, form, type) {
 	element.index = this.forms[form.index].elements[type].push(element) - 1;
 }
+
 /**
  * @constructor _Collection
- * @access private 
- * 
+ * @access private
+ *
  * @description Initializes form collection.
- * 
+ *
  * @param form HTMLFormElement (required)
- * 
+ *
  * @returns void
  */
 function _Collection(form) {

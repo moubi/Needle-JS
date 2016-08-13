@@ -3,34 +3,37 @@ NEEDLE.plug("ExpandableEffects", function() {
 NEEDLE.extend(ExpandableEffects, NEEDLE.Expandable);
 
 ExpandableEffects.progression = ["round", "fibonacci"];
+
 /**
- * @class ExpandableEffects 
- * 
+ * @class ExpandableEffects
+ *
  */
 function ExpandableEffects(configuration) {
 	this.ExpandableEffects(configuration);
 }
+
 /**
  * @constructor ExpandableEffects
- * @access public 
- * 
+ * @access public
+ *
  * @param configuration Object (required)
- * 
+ *
  * @returns void
  */
 ExpandableEffects.prototype.ExpandableEffects = function(configuration) {
 	this.Expandable(configuration);
 	this.progression = {};
 };
+
 /**
  * @method effects
- * @access public 
- * 
+ * @access public
+ *
  * @description Sets progression type
- * 
+ *
  * @param event expand|collapse String (required)
  * @param progression Object (required)
- * 
+ *
  * @returns ExpandableEffects instance pointer
  */
 ExpandableEffects.prototype.effects = function(event, progression) {
@@ -38,11 +41,11 @@ ExpandableEffects.prototype.effects = function(event, progression) {
 		if (progression.type) {
 			if (NEEDLE.inArray(progression.type, ExpandableEffects.progression)) {
 				this.progression[event] = {
-					type: progression.type, 
-					step: this[event + "Step"], 
-					mirror: (typeof progression.mirror != "undefined") ? progression.mirror : false, 
-					reverse: (typeof progression.reverse != "undefined") ? progression.reverse : false, 
-					start: 1, 
+					type: progression.type,
+					step: this[event + "Step"],
+					mirror: (typeof progression.mirror != "undefined") ? progression.mirror : false,
+					reverse: (typeof progression.reverse != "undefined") ? progression.reverse : false,
+					start: 1,
 					factor: 1
 				};
 			}
@@ -50,15 +53,16 @@ ExpandableEffects.prototype.effects = function(event, progression) {
 	}
 	return this;
 };
+
 /**
  * @method elements
- * @access public 
- * 
+ * @access public
+ *
  * @description Sets expandable details
- * 
+ *
  * @param target DOMElement (required)
  * @param button DOMElement (optional)
- * 
+ *
  * @returns Object
  */
 ExpandableEffects.prototype.elements = function(target, button) {
@@ -70,26 +74,27 @@ ExpandableEffects.prototype.elements = function(target, button) {
 	}
 	return details;
 };
+
 /**
  * @method bounce
- * @access public 
- * 
+ * @access public
+ *
  * @description Sets bounce effects
- * 
+ *
  * @param config Object (required)
  * @param button Object (optional)
- * 
+ *
  * @returns void
  */
 ExpandableEffects.prototype.bounce = function(details, config) {
 	config = config || {};
-	var i = distance = config.distance || 10, 
-		j = config.bounces || 2, 
+	var i = distance = config.distance || 10,
+		j = config.bounces || 2,
 		interval = config.interval || 30;
-		step = 20*distance/100, diff = 50*distance/100, 
-		height = details.height, 
+		step = 20*distance/100, diff = 50*distance/100,
+		height = details.height,
 		style = details.target.style;
-	
+
 	var cycle = setInterval(function() {
 		if (i > 0) {
 			details.height = height - (i -= step);
@@ -103,14 +108,15 @@ ExpandableEffects.prototype.bounce = function(details, config) {
 		style.height = details.height + "px";
 	}, interval);
 };
+
 /**
  * @method expandHeight
- * @access public 
- * 
+ * @access public
+ *
  * @description Increases visible height (expanding)
- * 
+ *
  * @param element Object (required)
- * 
+ *
  * @returns void
  */
 ExpandableEffects.prototype.expandHeight = function(element) {
@@ -123,7 +129,7 @@ ExpandableEffects.prototype.expandHeight = function(element) {
 			}
 			return addition;
 		};
-		
+
 	} else {
 		ExpandableEffects.prototype.expandHeight = function(element) {
 			var addition = element.height + this.expandStep;
@@ -132,14 +138,15 @@ ExpandableEffects.prototype.expandHeight = function(element) {
 	}
 	return this.expandHeight(element);
 };
+
 /**
  * @method collapseHeight
- * @access public 
- * 
+ * @access public
+ *
  * @description Decreases visible height (collapsing)
- * 
+ *
  * @param element Object (required)
- * 
+ *
  * @returns void
  */
 ExpandableEffects.prototype.collapseHeight = function(element) {
