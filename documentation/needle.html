@@ -7,7 +7,7 @@
 	<meta name="description" content="Needle JS - an Object oriented javascript framework with class like syntax" />
 	<meta name="author" content="Мирослав Николов (@moubi)" />
 
-	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>	
+	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/reused.css" />
 	<link rel="stylesheet" href="css/grid.css" />
 	<link rel="stylesheet" href="css/fonts.css" />
@@ -30,7 +30,7 @@
 				<ul>
 					<li><span class="flat"><a rel="overview" href="index.html" title="Overview">Overview</a></span></li>
 				</ul>
-			</section><br />	
+			</section><br />
 			<section id="menu" class="td menu rounded _6">
 				<ul>
 					<li><span><a rel="pages" href="#" title="Library API">API</a></span>
@@ -39,14 +39,14 @@
 							<li><span><a rel="fair" class="item" href="#" title="Core classes">Core features</a></span>
 								<ul class="submenu">
 									<li><a href="needle.html" title="Needle.js features">Needle</a></li>
-									<li><a href="ajax.html" title="Using AJAX requests">AJAX</a></li>
+									<!-- <li><a href="ajax.html" title="Using AJAX requests">AJAX</a></li>
 									<li><a href="dom.html" title="DOM and selector engine">DOM</a></li>
 									<li><a href="effects.html" title="Eye catching effects">Effects</a></li>
 									<li><a href="events.html" title="Working with event model">Events</a></li>
-									<li><a href="xml.html" title="Working with xml">XML</a></li>
+									<li><a href="xml.html" title="Working with xml">XML</a></li> -->
 								</ul>
 							</li>
-							<li><span><a rel="results" class="item" href="#" title="Create and use plugins">Plugins</a></span>
+							<!-- <li><span><a rel="results" class="item" href="#" title="Create and use plugins">Plugins</a></span>
 								<ul class="submenu">
 									<li><a href="create_plugins.html" title="Create plugins">Create</a></li>
 									<li><a href="extend.html" title="Extend plugins">Extend</a></li>
@@ -61,7 +61,7 @@
 								</ul>
 							</li>
 							<li><span><a rel="about" href="#" title="Browsers support">Browsers</a></span></li>
-							<li><span><a rel="contact" href="#" title="Contacts and support">Contacts</a></span></li>
+							<li><span><a rel="contact" href="#" title="Contacts and support">Contacts</a></span></li> -->
 						</ul>
 					</li>
 				</ul>
@@ -71,7 +71,7 @@
 			<section class="content rounded">
 				<h2>Needle.js core features</h2>
 				<p>
-					The core of NeedleJS is placed in <strong>Needle.js</strong> file. 
+					The core of NeedleJS is placed in <strong>Needle.js</strong> file.
 					It provides methods to <strong>organize</strong> your classes, <strong>extend</strong> them and <strong>add</strong> them to the page.
 					At your fingertips you can also find some handy methods and properties.
 				</p>
@@ -170,7 +170,7 @@ Person.race = <code class="string">"Caucasian"</code>;<code class="comment">// T
 				<h3>How to use NeedleJS classes</h3>
 				<p>In this section we will see how to request and work with core classes and plugins.</p>
 				<p>
-					When creating classes with NeedleJS you are actually adding them to the framework. 
+					When creating classes with NeedleJS you are actually adding them to the framework.
 					This allows you to use some handy methods on them after that.
 					One such method is <strong>require</strong> - it loads js file to the document.
 				</p>
@@ -200,7 +200,7 @@ N.onready(<code class="operator">function</code>() {
         <code class="comment">// callback executes after request is done</code>
         <code class="comment">// "this" points to current instance for convenience</code>
     }, <code class="string">"param1=value1&amp;param2=value2..."</code>);
-    
+
     <code class="comment">// Using Anchor plugin</code>
     N.plugins.Anchor.scrollTo(0, 0);
 });
@@ -220,7 +220,7 @@ N.onready(<code class="operator">function</code>() {
 <div class="pre rounded">
 <pre class="td _32">
 N.require(file, callback);		<code class="comment">// dynamically adds files to the page and executes function onload</code>
-N.objectMerge(Object1, Object2, ...); 	<code class="comment">// merges given number of objects</code> 
+N.objectMerge(Object1, Object2, ...); 	<code class="comment">// merges given number of objects</code>
 N.isArray(Array); 			<code class="comment">// checks if passed parameter is Array</code>
 N.extend(child, parent); 		<code class="comment">// extends child prototype with parent one</code>
 ...
@@ -230,12 +230,12 @@ N.extend(child, parent); 		<code class="comment">// extends child prototype with
 				<label>Merging objects:</label>
 <div class="pre rounded">
 <pre class="td _32">
-<code class="operator">var</code> obj1 = { a : 1, b : 2 }; 
+<code class="operator">var</code> obj1 = { a : 1, b : 2 };
 <code class="operator">var</code> obj2 = { c : 3 };
 <code class="comment">// Adding obj2 values to obj1</code>
 N.objectMerge(obj1, obj2); 			<code class="comment">// obj1 is now { a : 1, b : 2, c : 3 }</code>
 <code class="comment">// Adding obj1 and obj2 values to new empty object</code>
-<code class="operator">var</code> obj3 = N.objectMerge({}, obj1, obj2); 	<code class="comment">// obj3 is now { a : 1, b : 2, c : 3 }</code> 
+<code class="operator">var</code> obj3 = N.objectMerge({}, obj1, obj2); 	<code class="comment">// obj3 is now { a : 1, b : 2, c : 3 }</code>
 </pre>
 </div>
 				<label>Extending classes:</label>
@@ -253,7 +253,7 @@ AdvancedAjax.prototype.AdvancedAjax = <code class="operator">function</code>() {
 ...
 
 <code class="operator">return</code> AdvancedAjax;
-}); 
+});
 </pre>
 </div>
 				<p><strong>AdvancedAjax</strong>'s prototype now contains <strong>Ajax</strong>'s prototype properties and methods (public)</p>
@@ -275,7 +275,7 @@ N.onready(<code class="operator">function</code>() {
 </div>
 				<p class="align_right"><a href="#" title="top">top</a></p>
 			</section>
-		</div>	
+		</div>
 		<div class="clear"></div>
 	</section>
 	<div class="top_line"><div></div></div>
@@ -288,15 +288,15 @@ N.onready(<code class="operator">function</code>() {
 		N.require("js/needlejs/plugins/Anchor/Anchor.js");
 
 		N.onready(function() {
-			var menuHolder = N.get("menu"), 
-				menuItems = N.DOM("a.item", menuHolder), i = menuItems.length, 
+			var menuHolder = N.get("menu"),
+				menuItems = N.DOM("a.item", menuHolder), i = menuItems.length,
 				menu = new N.Expandable({ expandStep : 6, collapseStep : 12 });
-			
+
 			while (i--) {
 				if (menuItems[i].className == "item") {
 					menuItems[i].details = menu.set(
-						N.DOM("ul.submenu", menuHolder)[i], 
-						menuItems[i], 
+						N.DOM("ul.submenu", menuHolder)[i],
+						menuItems[i],
 						{ expanded : ((menuItems[i].rel == location.hash.substring(1)) ? true : false)}
 					);
 				}
@@ -309,7 +309,7 @@ N.onready(<code class="operator">function</code>() {
 					(target.details.expanded) ? menu.collapse(target.details) : menu.expand(target.details);
 				}
 			});
-			
+
 			N.Events.addEventListener(document, "click", function(e) {
 				//N.Events.preventDefault(e);
 				var target = N.Events.getTarget(e);
