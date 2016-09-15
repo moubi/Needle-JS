@@ -19,14 +19,14 @@ function DragDrop(box, handle) {
  * @returns current instance
  */
 DragDrop.prototype.DragDrop = function(box, handle) {
-	this.box = NEEDLE.get(box);
-    this.handle = NEEDLE.get(handle);
+  this.box = NEEDLE.get(box);
+  this.handle = NEEDLE.get(handle);
 
-    this.mouseDownFlag = false;
-    this.objectWindow = {};
-	this.delta = { x : 0, y : 0 };
-	this.mousePos = { x : 0, y : 0 };
-	return this;
+  this.mouseDownFlag = false;
+  this.objectWindow = {};
+  this.delta = { x : 0, y : 0 };
+  this.mousePos = { x : 0, y : 0 };
+  return this;
 };
 
 /**
@@ -40,13 +40,13 @@ DragDrop.prototype.DragDrop = function(box, handle) {
  * @returns current instance
  */
 DragDrop.prototype.mouseMove = function(e) {
-    if (this.mouseDownFlag) {
-    	this.mouseXY(e);
-    	NEEDLE.DOM.style(this.box, { top : this.objectWindow.y + this.delta.y + "px", left : this.objectWindow.x + this.delta.x + "px" });
-        this.objectWindow.y += this.delta.y;
-        this.objectWindow.x += this.delta.x;
-    }
-    return this;
+  if (this.mouseDownFlag) {
+    this.mouseXY(e);
+    NEEDLE.DOM.style(this.box, { top : this.objectWindow.y + this.delta.y + "px", left : this.objectWindow.x + this.delta.x + "px" });
+    this.objectWindow.y += this.delta.y;
+    this.objectWindow.x += this.delta.x;
+  }
+  return this;
 };
 
 /**
@@ -59,12 +59,12 @@ DragDrop.prototype.mouseMove = function(e) {
  * @returns current instance
  */
 DragDrop.prototype.mouseDown = function(e) {
-	this.mouseDownFlag = true;
-	NEEDLE.DOM.style(this.box, { position : "absolute", zIndex : 10000 });
+  this.mouseDownFlag = true;
+  NEEDLE.DOM.style(this.box, { position : "absolute", zIndex : 10000 });
 
-	this.objectWindow = { x : parseInt(this.box.style.left), y : parseInt(this.box.style.top) };
-	this.mousePos = this.mouse(e);
-	return this;
+  this.objectWindow = { x : parseInt(this.box.style.left), y : parseInt(this.box.style.top) };
+  this.mousePos = this.mouse(e);
+  return this;
 };
 
 /**
@@ -76,8 +76,8 @@ DragDrop.prototype.mouseDown = function(e) {
  * @returns current instance
  */
 DragDrop.prototype.mouseUp = function() {
-	this.mouseDownFlag = false;
-	return this;
+  this.mouseDownFlag = false;
+  return this;
 };
 
 /**
@@ -90,8 +90,8 @@ DragDrop.prototype.mouseUp = function() {
  * @returns current instance
  */
 DragDrop.prototype.open = function() {
-	NEEDLE.DOM.style(this.box, { top : NEEDLE.DOM.getY(this.box) + "px", left : NEEDLE.DOM.getX(this.box) + "px" });
-	return this;
+  NEEDLE.DOM.style(this.box, { top : NEEDLE.DOM.getY(this.box) + "px", left : NEEDLE.DOM.getX(this.box) + "px" });
+  return this;
 };
 
 /**
@@ -104,12 +104,12 @@ DragDrop.prototype.open = function() {
  * @returns current instance
  */
 DragDrop.prototype.mouse = function(e) {
-	if (NEEDLE.isIE) {
-		DragDrop.prototype.mouse = function(e) { return { x : event.clientX + document.body.scrollLeft, y : event.clientY + document.body.scrollTop }; };
-    } else {
-    	DragDrop.prototype.mouse = function(e) { return { x : e.pageX, y : e.pageY }; };
-    }
-	return this.mouse(e);
+  if (NEEDLE.isIE) {
+    DragDrop.prototype.mouse = function(e) { return { x : event.clientX + document.body.scrollLeft, y : event.clientY + document.body.scrollTop }; };
+  } else {
+    DragDrop.prototype.mouse = function(e) { return { x : e.pageX, y : e.pageY }; };
+  }
+  return this.mouse(e);
 };
 
 /**
@@ -122,9 +122,9 @@ DragDrop.prototype.mouse = function(e) {
  * @returns void
  */
 DragDrop.prototype.mouseXY = function(e) {
-	var mouse = this.mouse(e);
-    this.delta = { x : mouse.x - this.mousePos.x, y : mouse.y - this.mousePos.y };
-    this.mousePos = { x : mouse.x, y : mouse.y };
+  var mouse = this.mouse(e);
+  this.delta = { x : mouse.x - this.mousePos.x, y : mouse.y - this.mousePos.y };
+  this.mousePos = { x : mouse.x, y : mouse.y };
 };
 
 return DragDrop;

@@ -113,10 +113,10 @@ Expandable.prototype.start = function(event, element, callback) {
 		if (element.height*sign < limit) {
 			element.height = that[getExpandCollapseHeight](element);
 		} else {
-		    element.inProgress = false;
-		    element.expanded = !element.expanded;
+	    element.inProgress = false;
+	    element.expanded = !element.expanded;
 			clearInterval(element.cycling);
-	        (typeof callback === "function") && callback();
+	    (typeof callback === "function") && callback();
 		}
 		elementStyle.height = element.height + "px";
 	}, this[event + "Interval"]);

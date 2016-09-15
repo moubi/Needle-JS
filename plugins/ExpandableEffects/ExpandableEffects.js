@@ -88,6 +88,7 @@ ExpandableEffects.prototype.elements = function(target, button) {
  */
 ExpandableEffects.prototype.bounce = function(details, config) {
 	config = config || {};
+
 	var i = distance = config.distance || 10,
 		j = config.bounces || 2,
 		interval = config.interval || 30;

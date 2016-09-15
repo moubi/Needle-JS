@@ -1,11 +1,25 @@
 NEEDLE.plug("FormCosmetics", function() {
 
 FormCosmetics.ELEMENTS = ["radio", "select", "checkbox"];
-FormCosmetics.CLASSES = {radio : {checked : "fc_radio fc_bg_bottom", unchecked : "fc_radio fc_bg_top"},
-						select : {holder : "fc_select", left : "fc_select_left", right : "fc_select_right",
-									ul : "fc_select_options", closed : "fc_hidden", opened : "fc_visible",
-									choice : "fc_select_choice"},
-						checkbox : {checked : "fc_checkbox fc_bg_bottom", unchecked : "fc_checkbox fc_bg_top"}};
+FormCosmetics.CLASSES = {
+	radio: {
+		checked: "fc_radio fc_bg_bottom",
+		unchecked: "fc_radio fc_bg_top"
+	},
+	select: {
+		holder: "fc_select",
+		left: "fc_select_left",
+		right: "fc_select_right",
+		ul: "fc_select_options",
+		closed: "fc_hidden",
+		opened: "fc_visible",
+		choice: "fc_select_choice"
+	},
+	checkbox: {
+		checked: "fc_checkbox fc_bg_bottom",
+		unchecked: "fc_checkbox fc_bg_top"
+	}
+};
 FormCosmetics.FORMS_CLASS = "cosmetics";
 
 /**
