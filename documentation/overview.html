@@ -7,7 +7,7 @@
 	<meta name="description" content="Needle JS - an Object oriented javascript framework with class like syntax" />
 	<meta name="author" content="Мирослав Николов (@moubi)" />
 
-	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>	
+	<link href='http://fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/reused.css" />
 	<link rel="stylesheet" href="css/grid.css" />
 	<link rel="stylesheet" href="css/fonts.css" />
@@ -30,7 +30,7 @@
 				<ul>
 					<li><span class="flat"><a rel="overview" href="index.html" title="About our framework">About</a></span></li>
 				</ul>
-			</section><br />	
+			</section><br />
 			<section id="menu" class="td menu rounded _6">
 				<ul>
 					<li><span><a rel="pages" href="#" title="Library API">API</a></span>
@@ -39,14 +39,14 @@
 							<li><span><a rel="fair" class="item" href="#" title="Core classes">Core features</a></span>
 								<ul class="submenu">
 									<li><a href="needle.html" title="Needle.js features">Needle</a></li>
-									<li><a href="ajax.html" title="Using AJAX requests">AJAX</a></li>
+									<!-- <li><a href="ajax.html" title="Using AJAX requests">AJAX</a></li>
 									<li><a href="dom.html" title="DOM and selector engine">DOM</a></li>
 									<li><a href="effects.html" title="Eye catching effects">Effects</a></li>
 									<li><a href="events.html" title="Working with event model">Events</a></li>
-									<li><a href="xml.html" title="Working with xml">XML</a></li>
+									<li><a href="xml.html" title="Working with xml">XML</a></li> -->
 								</ul>
 							</li>
-							<li><span><a rel="results" class="item" href="#" title="Create and use plugins">Plugins</a></span>
+							<!-- <li><span><a rel="results" class="item" href="#" title="Create and use plugins">Plugins</a></span>
 								<ul class="submenu">
 									<li><a href="create_plugins.html" title="Create plugins">Create</a></li>
 									<li><a href="extend.html" title="Extend plugins">Extend</a></li>
@@ -61,7 +61,7 @@
 								</ul>
 							</li>
 							<li><span><a rel="about" href="#" title="Browsers support">Browsers</a></span></li>
-							<li><span><a rel="contact" href="#" title="Contacts and support">Contacts</a></span></li>
+							<li><span><a rel="contact" href="#" title="Contacts and support">Contacts</a></span></li> -->
 						</ul>
 					</li>
 				</ul>
@@ -71,7 +71,7 @@
 			<section class="content rounded">
 				<h2>Getting started with NeedleJS</h2>
 				<p>
-					In this section we will learn what you will needed in order to start using NeedleJS. 
+					In this section we will learn what you will needed in order to start using NeedleJS.
 				</p>
 			</section>
 			<section id="build" class="content rounded">
@@ -88,7 +88,7 @@
 </pre>
 </div>
 				<p>
-					That's it. For anything else we can use NeedleJS features for requesting classes/modules. 
+					That's it. For anything else we can use NeedleJS features for requesting classes/modules.
 				</p>
 				<p class="align_right"><a href="#" title="top">top</a></p>
 			</section>
@@ -107,7 +107,7 @@
     &lt;script&gt;
         N.require(<code class="string">"Sizzle.js"</code>);
         N.require(<code class="string">"DOM.js"</code>);
-        
+
         N.onready(<code class="operator">function</code>() {
             <code class="comment">// After requested files are loaded callback is executed</code>
             N.DOM(<code class="string">"p.text"</code>); <code class="comment">// Getting all paragraphs with class "text"</code>
@@ -125,8 +125,8 @@
 			<section class="content rounded">
 				<h3>Requesting custom plugins</h3>
 				<p>
-					NeedleJS comes with a lot of custom made plugins. It also allows you to create your own and adds them to the framework. 
-					Usualy they are placed in <strong>/plugins</strong> directory. 
+					NeedleJS comes with a lot of custom made plugins. It also allows you to create your own and adds them to the framework.
+					Usualy they are placed in <strong>/plugins</strong> directory.
 				</p>
 				<label>Request additional plugins:</label>
 <div class="pre rounded">
@@ -139,11 +139,11 @@
         N.require(<code class="string">"Sizzle.js"</code>);
         N.require(<code class="string">"DOM.js"</code>);
         N.require(<code class="string">"js/needlejs/plugins/Anchor/Anchor.js"</code>);
-        
+
         N.onready(<code class="operator">function</code>() {
             <code class="operator">var</code> elements = N.DOM(<code class="string">"a.text"</code>); <code class="comment">// Getting all links with class "anchor"</code>
             <code class="operator">var</code> length = elements.length;
-            
+
             <code class="operator">while</code> (length--) {
                 elements[length].onclick = <code class="operator">function</code>() {
                     <code class="comment">// Using Anchor plugin</code>
@@ -157,7 +157,7 @@
 </div>
 				<p>
 					No matter if you use plugins comming with NeedleJS or create your own - the syntax of working with them is the same.
-					Plugins act as constructor functions as well and can be accessed through <strong>N.plugins</strong> object like: <strong>N.plugins.&lt;MyPlugin&gt;</strong>  
+					Plugins act as constructor functions as well and can be accessed through <strong>N.plugins</strong> object like: <strong>N.plugins.&lt;MyPlugin&gt;</strong>
 				</p>
 				<p class="align_right"><a href="#" title="top">top</a></p>
 			</section>
@@ -169,7 +169,7 @@
 				</p>
 				<p>
 					Imagine you want to create plugin that helps you get all links with specific class and onclick brings you back to the top of the page (as the example from the previous section). <br />
-					We have to create js file and name it with the same name as our plugin/class inside - pick <strong>Toppper</strong>. 
+					We have to create js file and name it with the same name as our plugin/class inside - pick <strong>Toppper</strong>.
 					So we have <strong>Toppper.js</strong> file created and placed in <strong>/plugins</strong> directory.
 				</p>
 				<label>Let's create our plugin (the class itself):</label>
@@ -207,7 +207,7 @@ Toppper.prototype.off = <code class="operator">function</code>() {
 </pre>
 </div>
 				<p>
-					Our plugin is created. Now lets change previous example, so that it uses this plugin.  
+					Our plugin is created. Now lets change previous example, so that it uses this plugin.
 				</p>
 <div class="pre rounded">
 <pre class="td _32">
@@ -219,7 +219,7 @@ Toppper.prototype.off = <code class="operator">function</code>() {
         N.require(<code class="string">"Sizzle.js"</code>);
         N.require(<code class="string">"DOM.js"</code>);
         N.require(<code class="string">"js/needlejs/plugins/Toppper/Toppper.js"</code>);
-        
+
         N.onready(<code class="operator">function</code>() {
             <code class="operator">new</code> N.plugins.Toppper(N.DOM(<code class="string">"a.text"</code>)).on();
         });
@@ -232,11 +232,11 @@ Toppper.prototype.off = <code class="operator">function</code>() {
 					At the end we called <strong>on</strong> method to activate new link behaviour.
 				</p>
 				<p>
-					We can now move to the more in depth look of the library. Let't jump to the <a href="needle.html" title="NeedleJS core features">core features</a>. 
+					We can now move to the more in depth look of the library. Let't jump to the <a href="needle.html" title="NeedleJS core features">core features</a>.
 				</p>
 				<p class="align_right"><a href="#" title="top">top</a></p>
 			</section>
-		</div>	
+		</div>
 		<div class="clear"></div>
 	</section>
 	<div class="top_line"><div></div></div>
@@ -249,15 +249,15 @@ Toppper.prototype.off = <code class="operator">function</code>() {
 		N.require("js/needlejs/plugins/Anchor/Anchor.js");
 
 		N.onready(function() {
-			var menuHolder = N.get("menu"), 
-				menuItems = N.DOM("a.item", menuHolder), i = menuItems.length, 
+			var menuHolder = N.get("menu"),
+				menuItems = N.DOM("a.item", menuHolder), i = menuItems.length,
 				menu = new N.Expandable({ expandStep : 6, collapseStep : 12 });
-			
+
 			while (i--) {
 				if (menuItems[i].className == "item") {
 					menuItems[i].details = menu.set(
-						N.DOM("ul.submenu", menuHolder)[i], 
-						menuItems[i], 
+						N.DOM("ul.submenu", menuHolder)[i],
+						menuItems[i],
 						{ expanded : ((menuItems[i].rel == location.hash.substring(1)) ? true : false)}
 					);
 				}
@@ -270,7 +270,7 @@ Toppper.prototype.off = <code class="operator">function</code>() {
 					(target.details.expanded) ? menu.collapse(target.details) : menu.expand(target.details);
 				}
 			});
-			
+
 			N.Events.addEventListener(document, "click", function(e) {
 				//N.Events.preventDefault(e);
 				var target = N.Events.getTarget(e);
