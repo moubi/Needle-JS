@@ -79,6 +79,7 @@ Move.prototype.set = function(element, configuration) {
  */
 Move.prototype.start = function(element, callback) {
 	var that = this;
+
 	element.element.cycling = setInterval(function() {
 		that.cycling(element, callback);
 	}, element.configuration.interval);
@@ -135,6 +136,7 @@ Move.prototype.cycling = function(element, callback) {
  */
 function Details(element, configuration) {
 	this.configuration = configuration = _configure(element, configuration);
+
 	var lengthX = configuration.destination.left - parseFloat(element.style.left),
 		lengthY = configuration.destination.top - parseFloat(element.style.top);
 

@@ -116,6 +116,7 @@ CurtainSlideshow.prototype.play = function(interval, callback) {
 	this.blindsHolder.play = setInterval(function() {
 		that.slide("next", callback);
 	}, interval*1000);
+
 	return this;
 };
 
@@ -315,6 +316,7 @@ function _callFinish(i, j, callback) {
  */
 function _setBlindsBG() {
 	var i = this.blinds.length, style;
+
 	while (i--) {
 		this.reset(this.blinds[i].details);
 		style = this.blinds[i].element.style;

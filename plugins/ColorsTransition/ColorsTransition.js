@@ -46,6 +46,7 @@ function _init() {
 		var target = NEEDLE.Events.getTarget(e);
 		_execute.call(that, target, "forward");
 	});
+
 	NEEDLE.Events.addEventListener(document, "mouseout", function(e) {
 		var target = NEEDLE.Events.getTarget(e);
 		_execute.call(that, target, "backward");
@@ -65,8 +66,10 @@ function _init() {
  */
 function _execute(target, direction) {
 	var colors = (direction == "forward") ? { from : 0, to : 1 } : { from : 1, to : 0 };
+
 	if (NEEDLE.inArray(target, this.elements)) {
 		var attributeValues = target[this.attribute].split(this.attributeValue);
+
 		if (attributeValues.length > 1) {
 			attributeValues = attributeValues[1].replace(/^\s+|\s+$/g,"").split(" ");
 			if (attributeValues.length > 1 ) {

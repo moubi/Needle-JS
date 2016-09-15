@@ -7,7 +7,7 @@ NEEDLE.extend(XML, NEEDLE.Object);
  *
  */
 function XML() {
-	this.XML();
+  this.XML();
 }
 
 /**
@@ -17,8 +17,8 @@ function XML() {
  * @returns void
  */
 XML.prototype.XML = function() {
-	this.doc = null;
-	this.xml = null;
+  this.doc = null;
+  this.xml = null;
 };
 
 /**
@@ -32,16 +32,16 @@ XML.prototype.XML = function() {
  * @returns XMLDocument
  */
 XML.prototype.createDocument = function(root) {
-    if (document.implementation && document.implementation.createDocument) {
-    	XML.prototype.createDocument = function(root) { return this.doc = document.implementation.createDocument("", root || "", null); };
-    } else {
-    	XML.prototype.createDocument = function(root) {
-	        this.doc = new ActiveXObject("MSXML2.DOMDocument");
-	        (root) && this.doc.loadXML("<" +  root + "/>");
-	        return this.doc;
-    	};
-    }
-    return this.createDocument(root);
+  if (document.implementation && document.implementation.createDocument) {
+    XML.prototype.createDocument = function(root) { return this.doc = document.implementation.createDocument("", root || "", null); };
+  } else {
+    XML.prototype.createDocument = function(root) {
+      this.doc = new ActiveXObject("MSXML2.DOMDocument");
+      (root) && this.doc.loadXML("<" +  root + "/>");
+      return this.doc;
+    };
+  }
+  return this.createDocument(root);
 };
 
 /**
@@ -57,16 +57,16 @@ XML.prototype.createDocument = function(root) {
  * @returns Boolean
  */
 XML.prototype.load = function(url, callback) {
-	var that = this, request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-    	if (request.readyState == 4) {
-    		that.doc = request.responseXML;
-    		that.xml = that.doc.documentElement || that.doc;
-    		(typeof callback === "function") && callback.call(that);
-    	}
-    };
-    request.open("GET", url, true);
-    request.send(null);
+  var that = this, request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+    if (request.readyState == 4) {
+      that.doc = request.responseXML;
+      that.xml = that.doc.documentElement || that.doc;
+      (typeof callback === "function") && callback.call(that);
+    }
+  };
+  request.open("GET", url, true);
+  request.send(null);
 };
 
 /**
@@ -80,16 +80,16 @@ XML.prototype.load = function(url, callback) {
  * @returns XMLDocument
  */
 XML.prototype.parse = function(text) {
-    if (typeof DOMParser !== "undefined") {
-    	XML.prototype.parse = function(text) { return this.doc = new DOMParser().parseFromString(text, "application/xml"); };
-    } else {
-    	XML.prototype.parse = function(text) {
-	        var doc = this.createDocument();
-	        doc.loadXML(text);
-	        return doc;
-    	};
-    }
-    return this.parse(text);
+  if (typeof DOMParser !== "undefined") {
+    XML.prototype.parse = function(text) { return this.doc = new DOMParser().parseFromString(text, "application/xml"); };
+  } else {
+    XML.prototype.parse = function(text) {
+      var doc = this.createDocument();
+      doc.loadXML(text);
+      return doc;
+    };
+  }
+  return this.parse(text);
 };
 
 /**
@@ -103,12 +103,12 @@ XML.prototype.parse = function(text) {
  * @returns String
  */
 XML.serialize = function(node) {
-    if (typeof XMLSerializer !== "undefined" && typeof node.xml === "undefined") {
-    	XML.serialize = function(node) { return new XMLSerializer().serializeToString(node); };
-    } else {
-    	XML.serialize = function(node) { return node.xml; };
-    }
-    return XML.serialize(node);
+  if (typeof XMLSerializer !== "undefined" && typeof node.xml === "undefined") {
+    XML.serialize = function(node) { return new XMLSerializer().serializeToString(node); };
+  } else {
+    XML.serialize = function(node) { return node.xml; };
+  }
+  return XML.serialize(node);
 };
 
 

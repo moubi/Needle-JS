@@ -153,9 +153,11 @@ Gradual.geometric = function(params) {
 	var array = [], j = 1;
 
 	array.push(params.length*(1 - Gradual.FACTOR)/(1 - Math.pow(Gradual.FACTOR, params.power)));
+
 	while (j < params.power) {
 		array.push(array[(j++)-1] * Gradual.FACTOR);
 	}
+
 	(params.reverse) && array.reverse();
 	return (params.mirror) ? Gradual.mirror(array) : array;
 };
@@ -174,6 +176,7 @@ Gradual.round = function(params) {
 	var array = [], sum = current = 1;
 
 	array.push(current);
+
 	while (sum <= params.length) {
 		!(array.length % params.factor) && (current += params.step);
 		sum += current;
@@ -185,6 +188,7 @@ Gradual.round = function(params) {
 		}
 		array.push(current);
 	}
+
 	(params.reverse) && array.reverse();
 	return (params.mirror) ? Gradual.mirror(array) : array;
 };
@@ -203,10 +207,12 @@ Gradual.progression = function(params) {
 	var array = [], step = params.step, i;
 
 	array[0] = params.start || params.step;
+
 	for (i = 1; i < params.length; i++) {
 		(params.section <= i) && (step = params.factor);
 		array[i] = array[i-1] + step;
 	}
+
 	(params.reverse) && array.reverse();
 	return (params.mirror) ? Gradual.mirror(array) : array;
 };
@@ -225,6 +231,7 @@ Gradual.fibonacci = function(params) {
 	var array = [], sum = params.first + params.second, next;
 
 	array.push(params.first, params.second);
+
 	while (sum <= params.length) {
 		next = array[array.length-1] + array[array.length-2];
 		array.push(next);
@@ -240,6 +247,7 @@ Gradual.fibonacci = function(params) {
 			}
 		}
 	}
+
 	(params.reverse) && array.reverse();
 	return (params.mirror) ? Gradual.mirror(array) : array;
 };

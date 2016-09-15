@@ -182,7 +182,7 @@ function _push(name, details) {
 function _act(details) {
 	details.loaded = true;
 	_callbacks(details.callbacks);
-	(details.script.parentNode) && details.script.parentNode.removeChild(details.script);
+	details.script.parentNode && details.script.parentNode.removeChild(details.script);
 }
 
 /**
@@ -259,6 +259,7 @@ Needle.prototype.onready = function(callback) {
 				return false;
 			}
 		}
+
 		var i;
 		for (i in collection2) {
 			(typeof onReadyCallbacks[i] === "function") && onReadyCallbacks[i]();
@@ -456,12 +457,12 @@ Needle.prototype.extend = function(child, parent) {
  * @returns void
  */
 Needle.prototype.mix = function(obj, mixins) {
-    if (typeof mixins === "object") {
-        var i;
-        for (i in mixins) {
-            obj[i] = mixins[i];
-        }
+  if (typeof mixins === "object") {
+    var i;
+    for (i in mixins) {
+       obj[i] = mixins[i];
     }
+  }
 };
 
 /**
