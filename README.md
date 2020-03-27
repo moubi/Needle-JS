@@ -4,7 +4,7 @@
   <strong>An effort for a Class like Object oriented javascript framework.</strong>
 </p>
 
-  <img alt="NeedleJs logo" src="assets/logo.png" width="400" />
+  <img alt="NeedleJs logo" src="assets/logo.png" width="600" />
 </div>
 
 NeedleJS is an Object oriented javascript framework, realizing the notion of classes. Its goal is to split logic and complexity between different files (classes), which then can be requested dynamically and extended if needed.
